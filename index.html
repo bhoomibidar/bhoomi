@@ -7,6 +7,7 @@
     <meta name="description" content="Official portal for Revenue Department Karnataka, Bidar. Land records, conversions, services, reports, and officer information.">
     <meta name="keywords" content="revenue department, karnataka, bidar, land records, rtc, bhoomi, mojini, land conversion">
 
+    <!-- Fonts & Icons -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500;700&display=swap" as="style">
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" as="style">
 
@@ -16,200 +17,343 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
-        /* Modern CSS Reset */
         *, *::before, *::after { box-sizing: border-box; }
         body, h1, h2, h3, p, ul, li { margin: 0; padding: 0; }
         
         :root {
-            /* Government-like Color Palette */
-            --primary-bg: #EAEFF6;
-            --secondary-bg: #FFFFFF;
-            --header-bg: #004d99;
-            --header-text: #FFFFFF;
-            --accent-blue: #007bff;
-            --accent-green: #28a745;
-            --text-dark: #333333;
-            --text-light: #555555;
-            --border-light: #dddddd;
-            --link-color: #0056b3;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* Theme inspired by Revenue Dept site */
+            --brand-magenta: #a0165d;
+            --brand-magenta-dark: #7c1045;
+            --brand-magenta-soft: #fbe4f0;
+            --brand-blue: #004493;
+            --brand-blue-soft: #e3edff;
+
+            --primary-bg: #f5f5fb;
+            --secondary-bg: #ffffff;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --border-light: #e5e7eb;
+            --shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+
+            --nav-bg: #a0165d;
+            --nav-hover-bg: #7c1045;
+            --nav-text: #ffffff;
+            --nav-active: #ffd54a;
         }
 
         body {
             font-family: 'Roboto', 'Noto Sans Kannada', sans-serif;
-            background: var(--primary-bg);
+            background: radial-gradient(circle at top, #ffe9f4 0, #f5f5fb 40%, #eef2ff 100%);
             color: var(--text-dark);
             line-height: 1.6;
         }
 
         html { scroll-behavior: smooth; }
 
-        /* --- Header --- */
-        .header {
-            height: 80px;
+        /* ===== HEADER: DC – CENTER TEXT – ADC ===== */
+        .gov-header {
+            background: linear-gradient(90deg, #ffffff 0%, #fdf2ff 40%, #ffffff 100%);
+            border-bottom: 1px solid #f1c6e0;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 10px 24px;
+            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
-            z-index: 50;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            background: var(--header-bg);
-            color: var(--header-text);
+            z-index: 60;
         }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 0 30px;
-        }
-
-        .header .logo {
-            height: 60px;
-            width: 60px; /* Set a fixed width */
-            object-fit: contain;
-            margin-right: 15px;
-            border-radius: 50%; /* Make the logo round */
-        }
-        
-        .header .title {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-        
-        .header .subtitle {
-            font-size: clamp(0.9rem, 2vw, 1.2rem);
-            font-weight: 400;
-            margin-top: 5px;
-            text-transform: uppercase;
-        }
-
-        .header .emblem {
-            height: 50px;
-            width: auto;
-            margin-left: 15px;
-        }
-
-        /* --- Main Layout Grid --- */
-        .main-container {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 20px;
-            padding: 20px;
-            max-width: 2000px;
-            margin: auto;
-        }
-
-        /* --- Sidebar --- */
-        .sidebar {
-            background: var(--secondary-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            padding: 20px;
-            position: sticky;
-            top: 90px;
-            align-self: start;
-            min-height: calc(100vh - 110px);
-            border: 1px solid var(--border-light);
-        }
-
-        .sidebar-title {
-            color: var(--header-bg);
-            font-size: 1.2rem;
-            text-align: center;
-            font-weight: 700;
-            border-bottom: 2px solid var(--accent-blue);
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-        }
-
-        .nav-button {
-            width: 100%;
-            background: var(--primary-bg);
-            color: var(--text-dark);
-            border: 1px solid var(--border-light);
-            border-radius: 6px;
-            padding: 12px 15px;
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            font-weight: 500;
-            cursor: pointer;
-            text-align: left;
+        .gov-header-section {
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            min-width: 0;
         }
 
-        .nav-button i {
-            font-size: 1.2rem;
-            color: var(--accent-blue);
+        .gov-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--brand-magenta);
+            box-shadow:
+                0 0 0 3px #ffe1f4,
+                0 4px 10px rgba(0,0,0,0.25);
         }
 
-        .nav-button:hover {
-            transform: translateY(-2px);
-            background: var(--accent-blue);
-            color: var(--header-text);
-            border-color: var(--accent-blue);
-        }
-        
-        .nav-button:hover i {
-            color: var(--header-text);
-        }
-
-        .visitor-counter {
-            background: var(--accent-blue);
-            color: var(--header-text);
-            border-radius: 6px;
-            text-align: center;
-            margin-bottom: 15px;
+        .gov-text-main {
+            font-size: 0.96rem;
             font-weight: 700;
-            padding: 12px;
-            font-size: 1rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            white-space: nowrap;
         }
-        
-        .visitor-counter span {
+
+        .gov-text-sub {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+
+        .gov-center {
+            text-align: center;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .gov-center-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            color: var(--brand-blue);
+        }
+
+        .gov-center-line {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            color: var(--text-light);
+        }
+
+        .gov-center-line strong {
+            color: var(--brand-magenta);
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+            .gov-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .gov-center {
+                text-align: left;
+                align-self: stretch;
+            }
+        }
+
+        /* ===== NAVBAR ===== */
+        .main-nav {
+            background: var(--nav-bg);
+            position: sticky;
+            top: 82px;
+            z-index: 45;
+        }
+
+        @media (max-width: 900px) {
+            .main-nav { top: 130px; }
+        }
+
+        .nav-inner {
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            padding: 8px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu > li > a,
+        .nav-menu > li > button {
+            border: none;
+            background: transparent;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            cursor: pointer;
+            color: var(--nav-text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.45px;
+            border-radius: 999px;
+            position: relative;
+            transition: background 0.25s ease,
+                        transform 0.15s ease,
+                        box-shadow 0.2s ease;
+        }
+
+        .nav-menu > li > a::after,
+        .nav-menu > li > button::after {
+            content: "";
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 4px;
+            height: 2px;
+            background: var(--nav-active);
+            border-radius: 999px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.2s ease-out;
+        }
+
+        .nav-menu > li > a:hover,
+        .nav-menu > li > button:hover {
+            background: var(--nav-hover-bg);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32);
+        }
+
+        .nav-menu > li > a:hover::after,
+        .nav-menu > li > button:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-menu .home-icon {
             font-size: 1.1rem;
         }
 
-        /* --- Main Content --- */
+        .has-dropdown {
+            position: relative;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            min-width: 240px;
+            box-shadow: var(--shadow);
+            border-radius: 10px;
+            padding: 8px 0;
+            list-style: none;
+            display: none;
+            z-index: 100;
+        }
+
+        .has-dropdown:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown li a {
+            display: block;
+            padding: 7px 16px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            white-space: nowrap;
+            transition: background 0.2s ease,
+                        padding-left 0.2s ease,
+                        color 0.2s ease;
+        }
+
+        .dropdown li a:hover {
+            background: var(--brand-magenta-soft);
+            color: var(--brand-magenta);
+            padding-left: 22px;
+        }
+
+        /* CTA-style nav buttons */
+        .nav-menu .nav-quick {
+            background: linear-gradient(135deg, #ffce54 0%, #ffe082 100%);
+            color: #3b2a00;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+        }
+        .nav-menu .nav-quick:hover {
+            background: linear-gradient(135deg, #ffe082 0%, #ffecb3 100%);
+        }
+        .nav-menu .nav-quick.secondary {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, #0b63c4 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 68, 147, 0.45);
+        }
+        .nav-menu .nav-quick.secondary:hover {
+            background: linear-gradient(135deg, #0b63c4 0%, #4fa3ff 100%);
+        }
+        .nav-menu .nav-quick::after { display: none; }
+
+        /* ===== HERO SLIDER ===== */
+        .hero-photos {
+            max-width: 2000px;
+            margin: 10px auto 0;
+            padding: 16px 24px 0;
+        }
+
+        .hero-slider {
+            position: relative;
+            height: 260px;              /* a bit taller hero */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #ffffff;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        /* KEY – full bleed banner without stretch */
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;          /* fills area, keeps ratio */
+            object-position: center;    /* center crop */
+            display: block;
+        }
+
+        /* Fine-tune photo3 framing if needed */
+        .hero-slide:nth-child(3) img {
+            object-position: center top; /* show more top area of photo3 */
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .hero-slider { height: 200px; }
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .content-wrapper {
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 24px 24px 40px;
+        }
+
         .content-area {
-            padding: 15px 0;
+            padding: 4px 0 18px;
         }
 
         .section-title {
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-size: 1.3rem;
             font-weight: 700;
             text-align: center;
-            color: var(--header-bg);
-            margin-bottom: 30px;
+            color: var(--brand-blue);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 26px;
             position: relative;
         }
-        
-        .section-title::after {
-            content: '';
+
+        .section-title::before {
+            content: "";
+            width: 70px;
+            height: 3px;
+            background: var(--brand-magenta);
             display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent-blue);
-            margin: 8px auto 0;
-            border-radius: 2px;
+            margin: 0 auto 8px;
+            border-radius: 999px;
         }
 
         .website-links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
         }
 
-        /* Update grid for 5 cards per row */
         @media (min-width: 1400px) {
             .website-links-grid {
                 grid-template-columns: repeat(5, 1fr);
@@ -218,32 +362,36 @@
         
         .website-link-item {
             background: var(--secondary-bg);
-            padding: 20px;
-            border-radius: 10px;
+            padding: 18px 18px 16px;
+            border-radius: 16px;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            border-left: 5px solid var(--accent-blue);
+            border-top: 4px solid var(--brand-magenta);
+            transition: transform 0.25s ease,
+                        box-shadow 0.25s ease,
+                        border-color 0.25s ease,
+                        background 0.25s ease;
         }
 
         .website-link-item.highlighted-card {
-            border-left: 5px solid var(--accent-green);
-            box-shadow: 0 0 15px 5px rgba(40, 167, 69, 0.2), var(--shadow);
-            transform: translateY(-5px) scale(1.02);
+            border-top-color: var(--brand-blue);
+            box-shadow: 0 0 22px rgba(0, 68, 147, 0.35);
+            transform: translateY(-4px) scale(1.01);
         }
         
         .website-link-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 26px rgba(15, 23, 42, 0.18);
+            border-top-color: var(--nav-active);
+            background: #fdf2ff;
         }
 
         .website-link-item h3 {
-            font-size: 1.2rem;
+            font-size: 1.02rem;
             font-weight: 700;
-            color: var(--header-bg);
-            margin-bottom: 15px;
-            text-align: left;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-light);
+            color: var(--brand-blue);
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed var(--border-light);
         }
 
         .website-link-item ul {
@@ -251,50 +399,49 @@
         }
 
         .website-link-item li {
-            padding: 6px 0;
+            padding: 5px 0;
             position: relative;
         }
         
         .website-link-item li::before {
             content: "\f26a";
             font-family: 'bootstrap-icons';
-            font-size: 0.9rem;
-            color: var(--accent-blue);
-            margin-right: 8px;
+            font-size: 0.88rem;
+            color: var(--brand-magenta);
+            margin-right: 7px;
             display: inline-block;
             transition: color 0.3s;
         }
         
         .website-link-item:hover li::before {
-            color: var(--accent-green);
+            color: var(--brand-blue);
         }
 
         .website-link-item a {
-            color: var(--link-color);
+            color: var(--brand-blue);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.3s, text-decoration 0.3s;
+            transition: color 0.25s, text-decoration 0.25s;
         }
 
         .website-link-item a:hover {
-            color: var(--accent-green);
+            color: var(--brand-magenta-dark);
             text-decoration: underline;
         }
 
         /* --- Footer --- */
         .footer {
-            background: var(--header-bg);
-            color: var(--header-text);
-            padding: 25px 20px;
-            margin-top: 40px;
+            background: var(--nav-bg);
+            color: #ffffff;
+            padding: 20px 20px 28px;
             text-align: center;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -4px 15px rgba(15, 23, 42, 0.18);
         }
 
         .footer p {
             font-size: 0.85rem;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .footer strong {
@@ -302,93 +449,148 @@
         }
 
         .footer a {
-            color: var(--accent-green);
+            color: var(--nav-active);
             text-decoration: none;
             transition: color 0.3s;
         }
 
         .footer a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 1100px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-            .sidebar {
-                position: static;
-                margin: 0;
-                min-height: auto;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header-content { padding: 0 15px; }
-            .header .logo { height: 45px; width: 45px; }
-            .header .emblem { height: 35px; }
-            .header .title { font-size: 1.2rem; }
-            .header .subtitle { font-size: 0.8rem; }
-            .website-links-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-        }
-
-        @media (max-width: 500px) {
-            .website-links-grid { grid-template-columns: 1fr; }
+            color: #ffffff;
         }
     </style>
 </head>
-<body>
+<body id="top">
 
-    <header class="header">
-        <div class="header-content">
-            <div class="left">
-                <img src="assets/img/logo1.png" class="logo" alt="Bhoomi Bidar Logo"> 
-            </div>
-            <div class="center">
-                <div class="title">Deputy Commissioner Office, Bidar</div>
-                <div class="subtitle">Revenue Department, Government of Karnataka</div>
-            </div>
-            <div class="right">
-              <img src="assets/img/logo.png" class="emblem" alt="NIC Emblem">
+    <!-- TOP HEADER: DC | CENTER TEXT | ADC -->
+    <div class="gov-header">
+        <div class="gov-header-section">
+            <img src="assets/img/dc.jpg" alt="Smt. Shilpa Sharma​, IAS" class="gov-photo">
+            <div>
+                <div class="gov-text-main">Smt. Shilpa Sharma​, IAS</div>
+                <div class="gov-text-sub">Deputy Commissioner &amp; District Magistrate</div>
             </div>
         </div>
-    </header>
 
-    <div class="main-container">
-        <aside class="sidebar">
-            <div class="visitor-counter">
-                <span>Visitors: <span id="visitorCount">0</span></span>
+        <div class="gov-header-section gov-center">
+            <div>
+                <div class="gov-center-title">Deputy Commissioner Office, Bidar</div>
+                <div class="gov-center-line"><strong>Revenue Department</strong></div>
+                <div class="gov-center-line">Government of Karnataka</div>
             </div>
-            <div class="sidebar-title">Quick Navigation</div>
-            <button class="nav-button" onclick="window.open('Officers.html', '_blank')" aria-label="View Officers"><i class="bi bi-people-fill"></i> View Officers</button>
-            <button class="nav-button" onclick="window.open('https://app.powerbi.com/view?r=eyJrIjoiMzg0ZmU4ZDQtMWNiMy00ZjQ5LThiM2QtNGEzYzFkMTFkZGNmIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9', '_blank')" aria-label="Record Room Report"><i class="bi bi-graph-up"></i> Record Room Report</button>
-            <button class="nav-button" onclick="window.open('https://bhoomibidar.github.io/calllogsystem/', '_blank')" aria-label="Call Log System"><i class="bi bi-telephone-fill"></i> Call Log System</button>
-            <button class="nav-button" onclick="window.open('https://bhoomibidar.github.io/parihara/', '_blank')" aria-label="Go to Parihara Payment Page"> <i class="bi bi-cash-coin"></i> Parihara Payment</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Land-Conversion')" aria-label="Go to Land Conversion section"><i class="bi bi-arrow-right-circle-fill"></i> Land Conversion</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Land-Beat')" aria-label="Go to Land Beat section"><i class="bi bi-arrow-right-circle-fill"></i> Land Beat</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('RTC-Management')" aria-label="Go to RTC Management section"><i class="bi bi-arrow-right-circle-fill"></i> RTC Management</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('RTC-Online')" aria-label="Go to RTC Online section"><i class="bi bi-arrow-right-circle-fill"></i> RTC Online</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Mojini')" aria-label="Go to Mojini section"><i class="bi bi-arrow-right-circle-fill"></i> Mojini</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Bhoomi')" aria-label="Go to Bhoomi section"><i class="bi bi-arrow-right-circle-fill"></i> Bhoomi</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('RCCMS')" aria-label="Go to RCCMS section"><i class="bi bi-arrow-right-circle-fill"></i> RCCMS</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Sub-Register')" aria-label="Go to Sub Register section"><i class="bi bi-arrow-right-circle-fill"></i> Sub Register</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Record-Room')" aria-label="Go to Record Room section"><i class="bi bi-arrow-right-circle-fill"></i> Record Room</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Parihara')" aria-label="Go to Parihara section"><i class="bi bi-arrow-right-circle-fill"></i> Parihara</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Aadhar-Seeding-RTC')" aria-label="Go to Aadhar Seeding RTC section"><i class="bi bi-arrow-right-circle-fill"></i> Aadhar Seeding RTC</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Bagair-Hukum-Rejection')" aria-label="Go to Bagair Hukum Rejection section"><i class="bi bi-arrow-right-circle-fill"></i> Bagair Hukum Rejection</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Bagair-Hukum')" aria-label="Go to Bagair Hukum section"><i class="bi bi-arrow-right-circle-fill"></i> Bagair Hukum</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Form-1-to-5')" aria-label="Go to Form 1 to 5 section"><i class="bi bi-arrow-right-circle-fill"></i> Form 1 to 5</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Reports')" aria-label="Go to Reports section"><i class="bi bi-arrow-right-circle-fill"></i> Reports</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Ex-Servicemen')" aria-label="Go to Ex Servicemen section"><i class="bi bi-arrow-right-circle-fill"></i> Ex Servicemen</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Land-Availability')" aria-label="Go to Land Availability section"><i class="bi bi-arrow-right-circle-fill"></i> Land Availability</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('Plantation-on-Lease')" aria-label="Go to Plantation on Lease section"><i class="bi bi-arrow-right-circle-fill"></i> Plantation on Lease</button>
-            <button class="nav-button" onclick="scrollToSectionAndHighlight('MobileApps')" aria-label="Go to Mobile Apps section"><i class="bi bi-arrow-right-circle-fill"></i> Mobile Applications</button>
-        </aside>
+        </div>
 
+        <div class="gov-header-section" style="justify-content:flex-end;">
+            <div style="text-align:right;">
+                <div class="gov-text-main">Sri Shivanand B Karale</div>
+                <div class="gov-text-sub">Additional Deputy Commissioner, Bidar</div>
+            </div>
+            <img src="assets/img/adc.jpg" alt="Additional Deputy Commissioner, Bidar" class="gov-photo">
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="main-nav">
+        <div class="nav-inner">
+            <ul class="nav-menu">
+                <li>
+                    <a href="#top">
+                        <i class="bi bi-house-door-fill home-icon"></i>
+                        Home
+                    </a>
+                </li>
+
+                <li class="has-dropdown">
+                    <button type="button">
+                        District Systems <i class="bi bi-caret-down-fill"></i>
+                    </button>
+                    <ul class="dropdown">
+                        <li><a href="Officers.html" target="_blank">View Officers</a></li>
+                        <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMzg0ZmU4ZDQtMWNiMy00ZjQ5LThiM2QtNGEzYzFkMTFkZGNmIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9" target="_blank">Record Room Report</a></li>
+                        <li><a href="https://bhoomibidar.github.io/calllogsystem/" target="_blank">Call Log System</a></li>
+                        <li><a href="https://bhoomibidar.github.io/parihara/" target="_blank">Parihara Payment</a></li>
+                    </ul>
+                </li>
+
+                <li class="has-dropdown">
+                    <button type="button">
+                        Land Services <i class="bi bi-caret-down-fill"></i>
+                    </button>
+                    <ul class="dropdown">
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Land-Conversion')">Land Conversion</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Land-Beat')">Land Beat</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('RTC-Management')">RTC Management</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('RTC-Online')">RTC Online</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Mojini')">Mojini</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Bhoomi')">Bhoomi</a></li>
+                    </ul>
+                </li>
+
+                <li class="has-dropdown">
+                    <button type="button">
+                        Other Applications <i class="bi bi-caret-down-fill"></i>
+                    </button>
+                    <ul class="dropdown">
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('RCCMS')">RCCMS</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Sub-Register')">Sub Register</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Record-Room')">Record Room</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Parihara')">Parihara</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Aadhar-Seeding-RTC')">Aadhar Seeding &amp; E-Pouthi</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Bagair-Hukum-Rejection')">Bagair Hukum Rejection</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Bagair-Hukum')">Bagair Hukum</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Form-1-to-5')">Form 1 to 5</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Reports')">Reports</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Ex-Servicemen')">Ex Servicemen</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Land-Availability')">Land Availability</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Plantation-on-Lease')">Plantation on Lease</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('MobileApps')">Mobile Apps</a></li>
+                    </ul>
+                </li>
+
+                <!-- menu buttons after Other Applications -->
+                <li>
+                    <a href="Officers.html" target="_blank" class="nav-quick">
+                        <i class="bi bi-people-fill"></i>
+                        View Officers
+                    </a>
+                </li>
+                <li>
+                    <a href="https://bhoomibidar.github.io/calllogsystem/" target="_blank" class="nav-quick secondary">
+                        <i class="bi bi-telephone-fill"></i>
+                        Call Log System
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SLIDER -->
+    <section class="hero-photos">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <img src="assets/img/photo1.jpg" alt="Bidar District 1">
+            </div>
+            <div class="hero-slide">
+                <img src="assets/img/photo2.jpg" alt="Bidar District 2">
+            </div>
+            <div class="hero-slide">
+                <img src="assets/img/photo3.jpg" alt="Bidar District 3">
+            </div>
+            <div class="hero-slide">
+                <img src="assets/img/photo4.jpg" alt="Bidar District 4">
+            </div>
+            <div class="hero-slide">
+                <img src="assets/img/photo5.jpg" alt="Bidar District 5">
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-wrapper">
         <main class="content-area">
             <h2 class="section-title">Important Website Links</h2>
+
             <section class="website-links-grid">
-                
+                <!-- Land Conversion -->
                 <article class="website-link-item" id="Land-Conversion">
                     <h3>Land Conversion</h3>
                     <ul>
@@ -403,6 +605,7 @@
                     </ul>
                 </article>
 
+                <!-- Land Beat -->
                 <article class="website-link-item" id="Land-Beat">
                     <h3>Land Beat</h3>
                     <ul>
@@ -413,11 +616,12 @@
                     </ul>
                 </article>
 
+                <!-- RTC Management -->
                 <article class="website-link-item" id="RTC-Management">
                     <h3>RTC Management</h3>
                     <ul>
                         <li><a href="https://landrecords.karnataka.gov.in/Service109/rtcmgm/" target="_blank">Home</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service109/rtc_mgm_mis/" target="_blank">Report & Status</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service109/rtc_mgm_mis/" target="_blank">Report &amp; Status</a></li>
                         <li><a href="https://landrecords.karnataka.gov.in/service85/Login1.aspx" target="_blank">Old Jslip Approval AC</a></li>
                         <li><a href="https://parihara.karnataka.gov.in/service82/" target="_blank">SLAO Case Worker</a></li>
                         <li><a href="https://parihara.karnataka.gov.in/service83" target="_blank">SLAO Login</a></li>
@@ -425,6 +629,7 @@
                     </ul>
                 </article>
 
+                <!-- RTC Online -->
                 <article class="website-link-item" id="RTC-Online">
                     <h3>RTC Online</h3>
                     <ul>
@@ -434,13 +639,14 @@
                         <li><a href="https://rdreports.karnataka.gov.in/" target="_blank">RTC Detailed Report</a></li>
                     </ul>
                 </article>
-                
+
+                <!-- Mojini -->
                 <article class="website-link-item" id="Mojini">
                     <h3>Mojini</h3>
                     <ul>
                         <li><a href="https://www.rdservices.karnataka.gov.in/" target="_blank">Home</a></li>
                         <li><a href="https://bhoomojini.karnataka.gov.in/SERVICE30/RRTCase/RRT_Report" target="_blank">Datewise Report</a></li>
-                        <li><a href="https://bhoomojini.karnataka.gov.in/service24/" target="_blank">RRT & LND Report</a></li>
+                        <li><a href="https://bhoomojini.karnataka.gov.in/service24/" target="_blank">RRT &amp; LND Report</a></li>
                         <li><a href="https://bhoomojini.karnataka.gov.in/service19/" target="_blank">View Sketch</a></li>
                         <li><a href="https://bhoomojini.karnataka.gov.in/service39/" target="_blank">Akarband</a></li>
                         <li><a href="https://landrecords.karnataka.gov.in/Service10" target="_blank">Phodi Status and Report</a></li>
@@ -449,6 +655,7 @@
                     </ul>
                 </article>
 
+                <!-- Bhoomi -->
                 <article class="website-link-item" id="Bhoomi">
                     <h3>Bhoomi</h3>
                     <ul>
@@ -461,7 +668,8 @@
                         <li><a href="https://landrecords.karnataka.gov.in/service10/" target="_blank">Mojini-Phody Status Online</a></li>
                     </ul>
                 </article>
-                
+
+                <!-- RCCMS -->
                 <article class="website-link-item" id="RCCMS">
                     <h3>RCCMS</h3>
                     <ul>
@@ -473,6 +681,7 @@
                     </ul>
                 </article>
 
+                <!-- Sub Register -->
                 <article class="website-link-item" id="Sub-Register">
                     <h3>Sub Register</h3>
                     <ul>
@@ -482,6 +691,7 @@
                     </ul>
                 </article>
 
+                <!-- Record Room -->
                 <article class="website-link-item" id="Record-Room">
                     <h3>Record Room</h3>
                     <ul>
@@ -492,6 +702,7 @@
                     </ul>
                 </article>
 
+                <!-- Parihara -->
                 <article class="website-link-item" id="Parihara">
                     <h3>Parihara</h3>
                     <ul>
@@ -504,27 +715,29 @@
                         <li><a href="https://parihara.karnataka.gov.in/CropCollectionVAO" target="_blank">Crop Data Entry VAO</a></li>
                         <li><a href="https://parihara.karnataka.gov.in/CropCollectionTah/" target="_blank">Approval Tahsildar</a></li>
                         <li><a href="https://parihara.karnataka.gov.in/pariharatahsildara" target="_blank">Name Mismatch Tahsildar</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/CropReportApproval/" target="_blank">DC & AC Approval</a></li>
-                        <li><a href="https://drive.google.com/file/d/1NEetYkRn0Ix9NkwoooQbngY9lX5-QYw8/view?usp=sharing">User Manual</a></li>
-                        <li><a href="https://drive.google.com/file/d/1AHGixWu0GMaNLMKhQaUCLpYJSRsAb23O/view?usp=sharing">VAO Crop Collection</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/CropReportApproval/" target="_blank">DC &amp; AC Approval</a></li>
+                        <li><a href="https://drive.google.com/file/d/1NEetYkRn0Ix9NkwoooQbngY9lX5-QYw8/view?usp=sharing" target="_blank">User Manual</a></li>
+                        <li><a href="https://drive.google.com/file/d/1AHGixWu0GMaNLMKhQaUCLpYJSRsAb23O/view?usp=sharing" target="_blank">VAO Crop Collection</a></li>
                     </ul>
                 </article>
 
+                <!-- Aadhar Seeding & E-Pouthi -->
                 <article class="website-link-item" id="Aadhar-Seeding-RTC">
-                    <h3>Aadhar Seeding & E-Pouthi</h3>
+                    <h3>Aadhar Seeding &amp; E-Pouthi</h3>
                     <ul>
                         <li><a href="https://rdservices.karnataka.gov.in/service62" target="_blank">VAO Login</a></li>
                         <li><a href="https://rdservices.karnataka.gov.in/service124" target="_blank">E-Pouhti RI and SHR Login</a></li>
                         <li><a href="https://rdservices.karnataka.gov.in/service82" target="_blank">Status</a></li>
                         <li><a href="https://rdservices.karnataka.gov.in/service63" target="_blank">Reports</a></li>
                         <li><a href="https://drive.google.com/file/d/1KTZne5fnaX9SsUvRpChqW7EBJjaKdrEm/view" target="_blank">User Manual</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/Service63/AadharSeeding/EPautiKhataProgressReport ">E-Pouthi Reports</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/Service63/AadharSeeding/EPautiKhataProgressReport" target="_blank">E-Pouthi Reports</a></li>
                         <li><a href="https://drive.google.com/file/d/12I5-u-BUX-c-K9YJudGaF86XMimTFfl_/view" target="_blank">RTC Verification Manual</a></li>
-                        <li><a href="https://drive.google.com/file/d/1MWWPpKqGntN0jjGOkxRqC9MuFcm31Vpi/view">E Pouthi VAO User Manual </a></li>
-                        <li><a href="https://drive.google.com/file/d/1SZrmBv4P9c7S3U5Jp7g4Jj4EDMTp3HDL/view">E Pouthi RI and SHR User Manual </a></li>
+                        <li><a href="https://drive.google.com/file/d/1MWWPpKqGntN0jjGOkxRqC9MuFcm31Vpi/view" target="_blank">E Pouthi VAO User Manual</a></li>
+                        <li><a href="https://drive.google.com/file/d/1SZrmBv4P9c7S3U5Jp7g4Jj4EDMTp3HDL/view" target="_blank">E Pouthi RI and SHR User Manual</a></li>
                     </ul>
                 </article>
 
+                <!-- Bagair Hukum Rejection -->
                 <article class="website-link-item" id="Bagair-Hukum-Rejection">
                     <h3>Bagair Hukum Rejection</h3>
                     <ul>
@@ -537,6 +750,7 @@
                     </ul>
                 </article>
 
+                <!-- Bagair Hukum -->
                 <article class="website-link-item" id="Bagair-Hukum">
                     <h3>Bagair Hukum</h3>
                     <ul>
@@ -551,12 +765,13 @@
                         <li><a href="https://landrecords.karnataka.gov.in/service131/form57/" target="_blank">Form 57 Report</a></li>
                         <li><a href="https://bhoomi.karnataka.gov.in/FORM5053/" target="_blank">Form 50 53 Count</a></li>
                         <li><a href="https://bhoomojini.karnataka.gov.in/service55" target="_blank">BH Mojini Status</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service149" target="_blank">Form 50 & 53 Rec Cases</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service149" target="_blank">Form 50 &amp; 53 Rec Cases</a></li>
                         <li><a href="https://docs.google.com/presentation/d/1yTfMzC8J0UYHy14w69OnfOXF-5gnXRXG/edit#slide=id.p1" target="_blank">User Manual</a></li>
                         <li><a href="https://drive.google.com/file/d/1X7xGaE1umvzLI2BNqEE2LpJPkr2vpKHv/view" target="_blank">Work Flow</a></li>
                     </ul>
                 </article>
                 
+                <!-- Form 1 to 5 -->
                 <article class="website-link-item" id="Form-1-to-5">
                     <h3>Form 1 to 5</h3>
                     <ul>
@@ -567,13 +782,14 @@
                         <li><a href="https://rdservices.karnataka.gov.in/service79" target="_blank">ADLR</a></li>
                         <li><a href="https://drive.google.com/file/d/1mVmhPfuAi2C-h2sxIjC7gjs-2zNjq8eS/view" target="_blank">User Manual</a></li>
                         <li><a href="https://drive.google.com/file/d/1DSkH85TNgINg4zDQsdmd8WbRQyoGlag-/view" target="_blank">Work Flow</a></li>
-                        <li><a href="https://drive.google.com/file/d/1Pihc2p3_1M5I6i0LADe1j8SWp6KzTYyw/view" target="_blank">DFO & Tahsildar</a></li>
+                        <li><a href="https://drive.google.com/file/d/1Pihc2p3_1M5I6i0LADe1j8SWp6KzTYyw/view" target="_blank">DFO &amp; Tahsildar</a></li>
                         <li><a href="https://rdservices.karnataka.gov.in/service77" target="_blank">AC</a></li>
                         <li><a href="https://rdservices.karnataka.gov.in/service78" target="_blank">DDLR</a></li>
                         <li><a href="https://rdservices.karnataka.gov.in/service95" target="_blank">DC</a></li>
                     </ul>
                 </article>
 
+                <!-- Reports -->
                 <article class="website-link-item" id="Reports">
                     <h3>Reports</h3>
                     <ul>
@@ -583,12 +799,13 @@
                         <li><a href="https://rdservices.karnataka.gov.in/service55" target="_blank">Land Beat</a></li>
                         <li><a href="https://rdservices.karnataka.gov.in/Service68" target="_blank">Hakku Patra</a></li>
                         <li><a href="https://landrecords.karnataka.gov.in/service147/bhoomipendency/" target="_blank">Bhoomi Pendancy</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service110" target="_blank">MIS RTC, 3 & 9, Pyki Mismatch</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service110" target="_blank">MIS RTC, 3 &amp; 9, Pyki Mismatch</a></li>
                         <li><a href="https://rdservices.karnataka.gov.in/bhoomigis/" target="_blank">Bhoomi GIS</a></li>
                         <li><a href="https://landrecords.karnataka.gov.in/service154/" target="_blank">RTC and Mutation Extract</a></li>
                     </ul>
                 </article>
 
+                <!-- Ex Servicemen -->
                 <article class="website-link-item" id="Ex-Servicemen">
                     <h3>Ex Servicemen</h3>
                     <ul>
@@ -598,6 +815,7 @@
                     </ul>
                 </article>
 
+                <!-- Land Availability -->
                 <article class="website-link-item" id="Land-Availability">
                     <h3>Land Availability</h3>
                     <ul>
@@ -607,6 +825,7 @@
                     </ul>
                 </article>
 
+                <!-- Plantation on Lease -->
                 <article class="website-link-item" id="Plantation-on-Lease">
                     <h3>Plantation on Lease</h3>
                     <ul>
@@ -615,6 +834,7 @@
                     </ul>
                 </article>
 
+                <!-- Mobile Apps -->
                 <article class="website-link-item" id="MobileApps">
                     <h3>Mobile Applications</h3>
                     <ul>
@@ -646,8 +866,11 @@
                 
                 section.classList.add('highlighted-card');
 
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const sectionTop = section.offsetTop - headerHeight - 30;
+                const headerHeight =
+                    (document.querySelector('.gov-header')?.offsetHeight || 0) +
+                    (document.querySelector('.main-nav')?.offsetHeight || 0);
+
+                const sectionTop = section.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
 
                 setTimeout(() => {
                     window.scrollTo({
@@ -657,12 +880,19 @@
                 }, 200);
             }
         }
-        
-        // Visitor count script
-        let visitorCount = localStorage.getItem('visitorCount') || 0;
-        visitorCount = parseInt(visitorCount) + 1;
-        localStorage.setItem('visitorCount', visitorCount);
-        document.getElementById('visitorCount').textContent = visitorCount.toLocaleString();
+
+        // Auto slider
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function showNextSlide() {
+            if (!slides.length) return;
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(showNextSlide, 4000); // 4 seconds per image
     </script>
 </body>
 </html>
