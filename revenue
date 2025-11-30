@@ -324,7 +324,7 @@
         
         <div class="section-heading">
           <h5 class="text-primary">
-            <i class="fas fa-user-tie me-2"></i>Tahsildars Directory
+            <i class="fas fa-user-tie me-2"></i>AC & Tahsildars Directory
           </h5>
         </div>
         
@@ -340,6 +340,8 @@
               </tr>
             </thead>
             <tbody>
+              <tr><td>Bidar Division</td><td>Md Shakeel</td><td>9845126966</td><td>acbidar@gmail.com</td><td><span class="badge badge-status badge-active">Active</span></td></tr>
+              <tr><td>Basavkalyan Division</td><td>Prakash Kudari</td><td>9901991334</td><td>acbkalyan@gmail.com</td><td><span class="badge badge-status badge-active">Active</span></td></tr>
               <tr><td>Aurad</td><td>Mahesh Patil</td><td>7795516277</td><td>tah.aurad@gmail.com</td><td><span class="badge badge-status badge-active">Active</span></td></tr>
               <tr><td>Bidar</td><td>Ravindra Dama</td><td>9972743266</td><td>-</td><td><span class="badge badge-status badge-active">Active</span></td></tr>
               <tr><td>Bhalki</td><td>Mallikarjun Waddankere</td><td>9880211640</td><td>tahbhalki@gmail.com</td><td><span class="badge badge-status badge-active">Active</span></td></tr>
@@ -445,7 +447,7 @@
         
         <div class="section-heading">
           <h5 class="text-success">
-            <i class="fas fa-search me-2"></i>Revenue Officers Directory
+            <i class="fas fa-search me-2"></i>Revenue Inspectors Directory
           </h5>
         </div>
         
