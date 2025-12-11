@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -500,8 +501,125 @@
             }
         }
     </style>
+
+    <!-- ========= ENHANCEMENT OVERRIDES (added — do not remove) ========= -->
+    <style>
+        /* subtle page background texture */
+        body::before{
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 10% 10%, rgba(160,22,93,0.02), transparent 10%),
+                        radial-gradient(circle at 90% 90%, rgba(0,68,147,0.02), transparent 12%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* skip link */
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: auto;
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+            z-index: 9999;
+            border-radius: 6px;
+        }
+        .skip-link:focus {
+            left: 12px;
+            top: 12px;
+        }
+
+        /* make header slightly glassy */
+        .gov-header {
+            backdrop-filter: blur(4px);
+            background: linear-gradient(90deg, rgba(255,255,255,0.88) 0%, rgba(253,242,255,0.78) 40%, rgba(255,255,255,0.88) 100%);
+        }
+
+        /* nav improvements + responsive toggle */
+        .nav-bar-row {
+            display:flex; align-items:center; justify-content:space-between;
+            gap:12px;
+        }
+        .nav-toggle {
+            display:none;
+            background: transparent;
+            border: none;
+            color: var(--nav-text);
+            font-size: 1.6rem;
+            padding: 6px 8px;
+        }
+        @media (max-width: 900px){
+            .nav-toggle { display:inline-flex; align-items:center; }
+            .nav-menu { display: none; flex-direction: column; gap: 6px; background: linear-gradient(180deg, rgba(123,0,70,0.98), rgba(88,0,50,0.98)); padding: 12px; border-radius: 10px; margin-top: 8px; }
+            .nav-menu.show { display: flex; }
+            .nav-inner { display:flex; flex-direction:column; gap:8px; padding: 12px; }
+            .has-dropdown .dropdown { position: static; transform:none; width:100%; box-shadow:none; background:transparent; padding: 0; }
+            .dropdown li a { padding-left: 6px; background: rgba(255,255,255,0.04); margin:4px 0; border-radius:6px; color: #fff; }
+        }
+
+        /* nav menu focus styles */
+        .nav-menu a:focus, .nav-menu button:focus {
+            outline: 3px solid rgba(255, 213, 74, 0.35);
+            outline-offset: 3px;
+        }
+
+        /* hero slider: add controls + gradient overlay + captions */
+        .hero-slider { position: relative; overflow: hidden; }
+        .hero-slider::after{
+            content: "";
+            position:absolute; inset:0; pointer-events:none;
+            background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.14));
+            mix-blend-mode: multiply;
+        }
+        .hero-controls { position: absolute; right: 16px; bottom: 14px; display:flex; gap:8px; z-index: 20; }
+        .hero-btn { border: none; padding: 8px 10px; border-radius: 999px; background: rgba(255,255,255,0.9); cursor:pointer; box-shadow: 0 6px 14px rgba(2,6,23,0.12); }
+        .hero-btn:focus{ outline: 3px solid rgba(0,68,147,0.18); }
+
+        .hero-arrow { position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:50%; background: rgba(255,255,255,0.92); box-shadow: 0 8px 18px rgba(2,6,23,0.14); cursor:pointer; z-index:22; border:0; }
+        .hero-arrow.left { left: 12px; }
+        .hero-arrow.right{ right: 12px; }
+        .hero-arrow:focus{ outline: 3px solid rgba(160,22,93,0.18); }
+
+        .hero-indicators { position:absolute; left:50%; transform:translateX(-50%); bottom:10px; display:flex; gap:8px; z-index:21; }
+        .hero-indicators button{ width:10px; height:10px; border-radius:50%; border: none; background: rgba(255,255,255,0.6); cursor:pointer; }
+        .hero-indicators button.active{ width:18px; background: var(--nav-active); border-radius: 999px; }
+
+        /* animate cards appearing on scroll */
+        .website-link-item { transform: translateY(6px); opacity: 0; transition: transform 480ms cubic-bezier(.2,.9,.2,1), opacity 480ms ease; will-change: transform, opacity; }
+        .website-link-item.visible { transform: translateY(0); opacity: 1; }
+
+        /* make headers more lively */
+        .website-link-item h3 { position: relative; }
+        .website-link-item h3::after{
+            content: "";
+            position:absolute; left:0; bottom:-9px; width:36px; height:4px; border-radius: 8px;
+            background: linear-gradient(90deg, var(--brand-magenta), var(--nav-active));
+            opacity: 0.95;
+        }
+
+        /* refine footer */
+        .footer { background: linear-gradient(90deg, rgba(123,0,70,0.98), rgba(0,68,147,0.92)); color: #fff; }
+
+        /* card focus */
+        .website-link-item:focus-within { box-shadow: 0 18px 40px rgba(15,23,42,0.22); transform: translateY(-6px); border-top-color: var(--nav-active); }
+
+        /* slight typography tuning */
+        body { font-size: 15.5px; color: #0f1724; }
+        .gov-center-title { letter-spacing: 0.10em; }
+        .gov-text-main { font-weight: 800; color: #2b2b2b; }
+
+        /* reduce marquee visual noise on small devices */
+        @media (max-width:420px){
+            .notice-marquee { font-size: 0.72rem; padding: 6px 8px; }
+        }
+    </style>
 </head>
 <body id="top">
+
+    <!-- Skip link for accessibility -->
+    <a class="skip-link" href="#maincontent">Skip to content</a>
 
     <!-- TOP HEADER: DC | CENTER TEXT | ADC -->
     <div class="gov-header">
@@ -531,78 +649,84 @@
     </div>
 
     <!-- NAVBAR -->
-    <nav class="main-nav">
+    <nav class="main-nav" aria-label="Primary navigation">
         <div class="nav-inner">
-            <ul class="nav-menu">
-                <li>
-                    <a href="#top">
-                        <i class="bi bi-house-door-fill home-icon"></i>
-                        Home
-                    </a>
-                </li>
+            <div class="nav-bar-row">
+                <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNavMenu" aria-label="Toggle navigation">
+                    <i class="bi bi-list"></i>
+                </button>
 
-                <li class="has-dropdown">
-                    <button type="button">
-                        District Systems <i class="bi bi-caret-down-fill"></i>
-                    </button>
-                    <ul class="dropdown">
-                        <li><a href="Officers.html" target="_blank">Contact Us</a></li>
-                        <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMzg0ZmU4ZDQtMWNiMy00ZjQ5LThiM2QtNGEzYzFkMTFkZGNmIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9" target="_blank">Record Room Report</a></li>
-                        <li><a href="https://bhoomibidar.github.io/calllogsystem/" target="_blank">Call Log System</a></li>
-                        <li><a href="https://bhoomibidar.github.io/parihara/" target="_blank">Parihara Payment</a></li>
-                    </ul>
-                </li>
+                <ul class="nav-menu" id="mainNavMenu">
+                    <li>
+                        <a href="#top">
+                            <i class="bi bi-house-door-fill home-icon"></i>
+                            Home
+                        </a>
+                    </li>
 
-                <li class="has-dropdown">
-                    <button type="button">
-                        Land Services <i class="bi bi-caret-down-fill"></i>
-                    </button>
-                    <ul class="dropdown">
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Land-Conversion')">Land Conversion</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Land-Beat')">Land Beat</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('RTC-Management')">RTC Management</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('RTC-Online')">RTC Online</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Mojini')">Mojini</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Bhoomi')">Bhoomi</a></li>
-                    </ul>
-                </li>
+                    <li class="has-dropdown">
+                        <button type="button">
+                            District Systems <i class="bi bi-caret-down-fill"></i>
+                        </button>
+                        <ul class="dropdown">
+                            <li><a href="Officers.html" target="_blank">Contact Us</a></li>
+                            <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMzg0ZmU4ZDQtMWNiMy00ZjQ5LThiM2QtNGEzYzFkMTFkZGNmIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9" target="_blank">Record Room Report</a></li>
+                            <li><a href="https://bhoomibidar.github.io/calllogsystem/" target="_blank">Call Log System</a></li>
+                            <li><a href="https://bhoomibidar.github.io/parihara/" target="_blank">Parihara Payment</a></li>
+                        </ul>
+                    </li>
 
-                <li class="has-dropdown">
-                    <button type="button">
-                        Other Applications <i class="bi bi-caret-down-fill"></i>
-                    </button>
-                    <ul class="dropdown">
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('RCCMS')">RCCMS</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Sub-Register')">Sub Register</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Record-Room')">Record Room</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Parihara')">Parihara</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Aadhar-Seeding-RTC')">Aadhar Seeding &amp; E-Pouthi</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Bagair-Hukum-Rejection')">Bagair Hukum Rejection</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Bagair-Hukum')">Bagair Hukum</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Form-1-to-5')">Form 1 to 5</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Reports')">Reports</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Ex-Servicemen')">Ex Servicemen</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Land-Availability')">Land Availability</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Plantation-on-Lease')">Plantation on Lease</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('MobileApps')">Mobile Apps</a></li>
-                    </ul>
-                </li>
+                    <li class="has-dropdown">
+                        <button type="button">
+                            Land Services <i class="bi bi-caret-down-fill"></i>
+                        </button>
+                        <ul class="dropdown">
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Land-Conversion')">Land Conversion</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Land-Beat')">Land Beat</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('RTC-Management')">RTC Management</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('RTC-Online')">RTC Online</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Mojini')">Mojini</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Bhoomi')">Bhoomi</a></li>
+                        </ul>
+                    </li>
 
-                <!-- menu items after Other Applications -->
-                <li>
-                    <a href="Officers.html" target="_blank">
-                        <i class="bi bi-people-fill"></i>
-                        View Officers
-                    </a>
-                </li>
-                <li>
-                    <a href="https://bhoomibidar.github.io/calllogsystem/" target="_blank">
-                        <i class="bi bi-telephone-fill"></i>
-                        Call Log System
-                    </a>
-                </li>
+                    <li class="has-dropdown">
+                        <button type="button">
+                            Other Applications <i class="bi bi-caret-down-fill"></i>
+                        </button>
+                        <ul class="dropdown">
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('RCCMS')">RCCMS</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Sub-Register')">Sub Register</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Record-Room')">Record Room</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Parihara')">Parihara</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Aadhar-Seeding-RTC')">Aadhar Seeding &amp; E-Pouthi</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Bagair-Hukum-Rejection')">Bagair Hukum Rejection</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Bagair-Hukum')">Bagair Hukum</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Form-1-to-5')">Form 1 to 5</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Reports')">Reports</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Ex-Servicemen')">Ex Servicemen</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Land-Availability')">Land Availability</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('Plantation-on-Lease')">Plantation on Lease</a></li>
+                            <li><a href="javascript:void(0)" onclick="scrollToSectionAndHighlight('MobileApps')">Mobile Apps</a></li>
+                        </ul>
+                    </li>
 
-            </ul>
+                    <!-- menu items after Other Applications -->
+                    <li>
+                        <a href="Officers.html" target="_blank">
+                            <i class="bi bi-people-fill"></i>
+                            View Officers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://bhoomibidar.github.io/calllogsystem/" target="_blank">
+                            <i class="bi bi-telephone-fill"></i>
+                            Call Log System
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -620,29 +744,46 @@
     </div>
 
     <!-- HERO SLIDER -->
-    <section class="hero-photos">
-        <div class="hero-slider">
-            <div class="hero-slide active">
-                <img src="assets/img/photo1.jpg" alt="Bidar District 1">
+    <section class="hero-photos" aria-label="Hero images">
+        <div class="hero-slider" id="heroSlider" role="region" aria-roledescription="carousel" aria-live="polite">
+            <div class="hero-slide active" data-slide-index="0">
+                <img src="assets/img/photo1.jpg" alt="Bidar District 1" loading="lazy">
             </div>
-            <div class="hero-slide">
-                <img src="assets/img/photo2.jpg" alt="Bidar District 2">
+            <div class="hero-slide" data-slide-index="1">
+                <img src="assets/img/photo2.jpg" alt="Bidar District 2" loading="lazy">
             </div>
-            <div class="hero-slide">
-                <img src="assets/img/photo3.jpg" alt="Bidar District 3">
+            <div class="hero-slide" data-slide-index="2">
+                <img src="assets/img/photo3.jpg" alt="Bidar District 3" loading="lazy">
             </div>
-            <div class="hero-slide">
-                <img src="assets/img/photo4.jpg" alt="Bidar District 4">
+            <div class="hero-slide" data-slide-index="3">
+                <img src="assets/img/photo4.jpg" alt="Bidar District 4" loading="lazy">
             </div>
-            <div class="hero-slide">
-                <img src="assets/img/photo5.jpg" alt="Bidar District 5">
+            <div class="hero-slide" data-slide-index="4">
+                <img src="assets/img/photo5.jpg" alt="Bidar District 5" loading="lazy">
+            </div>
+
+            <!-- arrows -->
+            <button class="hero-arrow left" id="heroPrev" aria-label="Previous slide"><i class="bi bi-chevron-left"></i></button>
+            <button class="hero-arrow right" id="heroNext" aria-label="Next slide"><i class="bi bi-chevron-right"></i></button>
+
+            <!-- indicators -->
+            <div class="hero-indicators" id="heroIndicators" aria-hidden="false"></div>
+
+            <!-- small control (pause/play) -->
+            <div class="hero-controls" aria-hidden="false">
+                <button class="hero-btn" id="heroPause" aria-pressed="false" title="Pause autoplay">
+                    <i class="bi bi-pause-fill"></i>
+                </button>
+                <button class="hero-btn" id="heroPlay" style="display:none" title="Play autoplay">
+                    <i class="bi bi-play-fill"></i>
+                </button>
             </div>
         </div>
     </section>
 
     <!-- MAIN CONTENT -->
     <div class="content-wrapper">
-        <main class="content-area">
+        <main class="content-area" id="maincontent" tabindex="-1">
             <section class="website-links-grid">
 
                 <!-- Land Conversion -->
@@ -1008,6 +1149,155 @@
         }
 
         setInterval(showNextSlide, 4000); // 4 seconds per image
+    </script>
+
+    <!-- ========= ENHANCEMENT SCRIPT (added — do not remove) ========= -->
+    <script>
+        (function () {
+            // NAV TOGGLE (mobile)
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNavMenu');
+            navToggle?.addEventListener('click', function () {
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', String(!expanded));
+                mainNav.classList.toggle('show');
+            });
+
+            // HERO SLIDER: build indicators and controls, pause on hover, keyboard nav
+            const slider = document.getElementById('heroSlider');
+            const slides = slider ? Array.from(slider.querySelectorAll('.hero-slide')) : [];
+            const prevBtn = document.getElementById('heroPrev');
+            const nextBtn = document.getElementById('heroNext');
+            const indicatorsWrap = document.getElementById('heroIndicators');
+            const pauseBtn = document.getElementById('heroPause');
+            const playBtn = document.getElementById('heroPlay');
+            let interval = null;
+            let autoplay = true;
+            const INTERVAL_MS = 4500;
+
+            function goToSlide(index) {
+                slides.forEach(s => s.classList.remove('active'));
+                slides[index].classList.add('active');
+                // update indicators
+                Array.from(indicatorsWrap.children).forEach((btn, i) => {
+                    btn.classList.toggle('active', i === index);
+                    btn.setAttribute('aria-pressed', String(i === index));
+                });
+                slider.setAttribute('data-current', index);
+            }
+
+            function nextSlide() {
+                const cur = Number(slider.getAttribute('data-current') || 0);
+                const nxt = (cur + 1) % slides.length;
+                goToSlide(nxt);
+            }
+
+            function prevSlide() {
+                const cur = Number(slider.getAttribute('data-current') || 0);
+                const prev = (cur - 1 + slides.length) % slides.length;
+                goToSlide(prev);
+            }
+
+            function startAutoplay() {
+                if (interval) clearInterval(interval);
+                interval = setInterval(nextSlide, INTERVAL_MS);
+                autoplay = true;
+                pauseBtn?.setAttribute('aria-pressed', 'false');
+                pauseBtn && (pauseBtn.style.display = '');
+                playBtn && (playBtn.style.display = 'none');
+            }
+
+            function stopAutoplay() {
+                if (interval) clearInterval(interval);
+                autoplay = false;
+                pauseBtn?.setAttribute('aria-pressed', 'true');
+                pauseBtn && (pauseBtn.style.display = 'none');
+                playBtn && (playBtn.style.display = '');
+            }
+
+            // create indicators
+            slides.forEach((s, i) => {
+                const btn = document.createElement('button');
+                btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                btn.dataset.index = i;
+                btn.addEventListener('click', () => {
+                    goToSlide(Number(btn.dataset.index));
+                });
+                if (i === 0) btn.classList.add('active');
+                indicatorsWrap.appendChild(btn);
+            });
+
+            // initial
+            slider.setAttribute('data-current', 0);
+            goToSlide(0);
+            startAutoplay();
+
+            // prev/next buttons
+            prevBtn?.addEventListener('click', () => { prevSlide(); stopAutoplay(); });
+            nextBtn?.addEventListener('click', () => { nextSlide(); stopAutoplay(); });
+
+            // pause/play
+            pauseBtn?.addEventListener('click', () => { stopAutoplay(); });
+            playBtn?.addEventListener('click', () => { startAutoplay(); });
+
+            // pause on hover/focus
+            slider?.addEventListener('mouseenter', () => { stopAutoplay(); });
+            slider?.addEventListener('mouseleave', () => { startAutoplay(); });
+
+            // keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') { prevSlide(); stopAutoplay(); }
+                if (e.key === 'ArrowRight') { nextSlide(); stopAutoplay(); }
+            });
+
+            // reveal cards on scroll (intersection observer)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.website-link-item').forEach(card => observer.observe(card));
+
+            // Inline improvement: ensure images keep aspect ratio and are loaded smoothly
+            document.querySelectorAll('.hero-slide img').forEach(img => {
+                img.addEventListener('error', () => {
+                    // fallback: if image fails to load, reduce opacity gracefully
+                    img.style.opacity = '0.6';
+                });
+            });
+
+            // Smooth skip link focus
+            document.querySelectorAll('.skip-link').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.setAttribute('tabindex', '-1');
+                        target.focus();
+                    }
+                });
+            });
+
+            // Improve dropdown hover accessibility: toggle on focus as well
+            document.querySelectorAll('.has-dropdown > button').forEach(btn=>{
+                btn.addEventListener('focus', ()=> {
+                    const dd = btn.nextElementSibling;
+                    dd && (dd.style.display = 'block');
+                });
+                btn.addEventListener('blur', ()=> {
+                    const dd = btn.nextElementSibling;
+                    // delay hiding so keyboard users can move into dropdown
+                    setTimeout(()=>{ dd && (dd.style.display = 'none'); }, 150);
+                });
+            });
+
+            // Accessible titles for hero region
+            slider.setAttribute('aria-label', 'Bidar district photos carousel. Use left/right arrows to navigate.');
+
+        })();
     </script>
 </body>
 </html>
