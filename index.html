@@ -137,20 +137,25 @@
             .dropdown li a { color:#fff; background: rgba(255,255,255,0.04); margin:4px 0; }
         }
 
-        /* ========== ANNOUNCEMENTS (replaces noisy marquee) ========== */
-        .announcement {
-            max-width: var(--container);
-            margin: 12px auto 0;
-            padding: 10px 18px;
-            display:flex;
-            align-items:center;
-            gap:12px;
-            background: linear-gradient(90deg, rgba(255,229,243,0.6), rgba(227,237,255,0.6));
-            border-radius: 12px;
-            border: 1px solid rgba(241,198,224,0.9);
-            margin-left:18px; margin-right:18px;
-            color: var(--text-dark);
-        }
+      .announcement {
+    max-width: var(--container);
+    margin: 12px auto 0;     /* 🔥 PERFECT CENTER ALIGN */
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    background: linear-gradient(
+        90deg,
+        rgba(255,229,243,0.6),
+        rgba(227,237,255,0.6)
+    );
+
+    border-radius: 12px;
+    border: 1px solid rgba(241,198,224,0.9);
+    color: var(--text-dark);
+}
+
         .announcement strong{ color:var(--brand-magenta); }
         .announcement .ann-text{ flex:1; font-style:italic; color:var(--muted); }
         .announcement .ann-controls { display:flex; gap:8px; align-items:center; }
