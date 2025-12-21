@@ -38,6 +38,22 @@
             --container: 1400px;
         }
 
+/* Highlighted navbar button (Parihara Bidar) */
+.nav-menu a.nav-special {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-weight: 700;
+    background: transparent;
+    color: #ffffff !important;   /* 🔥 FIX */
+}
+
+.nav-menu a.nav-special:hover {
+    background: #ffffff;
+    color: #7b0046 !important;   /* 🔥 FIX */
+}
+   
+
         /* Respect reduced motion preference */
         @media (prefers-reduced-motion: reduce) {
             * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
@@ -92,7 +108,19 @@
         .nav-toggle { display:none; background:transparent; border:0; font-size:1.4rem; color: #fff; padding:8px; }
         .nav-menu { list-style:none; display:flex; gap:18px; align-items:center; justify-content:center; flex-wrap:wrap; margin:0; padding:6px 6px; width:100%; }
         .nav-menu a, .nav-menu button { color:#fff; font-weight:600; text-transform:uppercase; font-size:0.88rem; padding:8px 12px; border-radius:8px; background:transparent; border:0; display:inline-flex; align-items:center; gap:8px; }
-        .nav-menu a:hover, .nav-menu button:hover { background:rgba(255,255,255,0.06); color:#fff; }
+/* Unified navbar hover style for ALL buttons */
+/* Apply hover ONLY to top-level navbar items (NOT dropdown) */
+.nav-menu > li > a,
+.nav-menu > li > button {
+    color: #ffffff !important;
+}
+
+.nav-menu > li > a:hover,
+.nav-menu > li > button:hover {
+    background: #ffffff;
+    color: #7b0046 !important;
+}
+
         .has-dropdown { position:relative; }
         .dropdown { position:absolute; top:100%; left:50%; transform:translateX(-50%); background:#fff; min-width:240px; border-radius:12px; box-shadow:0 8px 30px rgba(2,6,23,0.12); padding:8px 6px; display:none; z-index:80; }
         .has-dropdown:hover .dropdown, .has-dropdown:focus-within .dropdown { display:block; }
@@ -256,7 +284,7 @@
                         </button>
                         <ul class="dropdown" role="menu" aria-label="District Systems submenu">
                             <li><a href="Officers.html" target="_blank" role="menuitem">Contact Us</a></li>
-                            <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMzg0ZmU4ZDQtMWNiMy00ZjQ5LThiM2QtNGEzYzFkMTFkZGNmIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9" target="_blank" role="menuitem">Record Room Report</a></li>
+                           <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMzg0ZmU4ZDQtMWNiMy00ZjQ5LThiM2QtNGEzYzFkMTFkZGNmIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9" target="_blank" role="menuitem">Record Room Report</a></li>
                             <li><a href="https://bhoomibidar.github.io/calllogsystem/" target="_blank" role="menuitem">Call Log System</a></li>
                             <li><a href="https://bhoomibidar.github.io/parihara/" target="_blank" role="menuitem">Parihara Payment</a></li>
                         </ul>
@@ -299,10 +327,22 @@
 
                     <li><a href="Officers.html" target="_blank"><i class="bi bi-people-fill"></i> View Officers</a></li>
                     <li><a href="https://bhoomibidar.github.io/calllogsystem/" target="_blank"><i class="bi bi-telephone-fill"></i> Call Log System</a></li>
+<li>
+    <a href="https://app.powerbi.com/view?r=eyJrIjoiYWQ0MzExOGQtYTY4NC00ODUyLTkyOGQtYTU4ZDY1ZDk4YjBkIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9&pageName=e7cae6a865b9174b7aa6"
+       target="_blank"
+       class="nav-special">
+        <i class="bi bi-bar-chart-fill"></i>
+        Parihara Bidar
+    </a>
+</li>
+
                 </ul>
             </div>
         </div>
     </nav>
+
+
+
 
     <!-- ANNOUNCEMENT / Accessible replacement for marquee -->
     <div class="announcement" role="region" aria-live="polite" aria-atomic="true" id="announcement">
