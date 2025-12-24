@@ -32,6 +32,7 @@
             background-color: var(--bg-light);
             color: var(--text-main);
             line-height: 1.6;
+            transition: all 0.3s ease;
         }
 
         a { text-decoration: none; transition: 0.3s; }
@@ -46,6 +47,7 @@
             padding: 12px 40px;
             border-bottom: 1px solid var(--gov-border);
             box-shadow: var(--shadow-sm);
+            position: relative;
         }
 
         .header-profile { display: flex; align-items: center; gap: 15px; }
@@ -93,6 +95,94 @@
             width: 100%; 
             color: var(--text-muted); 
             font-weight: 600;
+        }
+
+        /* Language Toggle */
+        .lang-toggle-container {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .lang-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gov-blue);
+        }
+
+        .lang-toggle {
+            width: 60px;
+            height: 30px;
+            background-color: #e2e8f0;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gov-light-blue);
+        }
+
+        .lang-toggle.active {
+            background-color: var(--brand-magenta-light);
+        }
+
+        .lang-toggle::before {
+            content: 'EN';
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gov-blue);
+            font-weight: bold;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-toggle::after {
+            content: 'KN';
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-weight: bold;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-toggle.active::before {
+            color: #64748b;
+        }
+
+        .lang-toggle.active::after {
+            color: white;
+        }
+
+        .lang-toggle-handle {
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: var(--gov-blue);
+        }
+
+        .lang-toggle.active .lang-toggle-handle {
+            left: 32px;
+            background-color: var(--gov-blue);
+            color: white;
         }
 
         /* ========== NAVIGATION ========== */
@@ -179,57 +269,101 @@
             font-size: 1.8rem; cursor: pointer; box-shadow: var(--shadow-md); display: none; z-index: 2000;
         }
 
-        @media (max-width: 1200px) { .links-grid { grid-template-columns: repeat(3, 1fr); } }
+        /* WhatsApp Feedback Button */
+        .whatsapp-feedback {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: #25d366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-feedback:hover {
+            transform: scale(1.1);
+            color: #fff;
+        }
+
+        .whatsapp-feedback::after {
+            content: "Feedback";
+            position: absolute;
+            left: 70px;
+            background: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .whatsapp-feedback:hover::after {
+            opacity: 1;
+        }
+
+        /* Kannada Language Style */
+        body.kannada {
+            font-family: 'Noto Sans Kannada', 'Inter', sans-serif;
+        }
+
+        .kannada .dept-title {
+            font-family: 'Noto Sans Kannada', 'Merriweather', serif;
+        }
+
+        @media (max-width: 1200px) { 
+            .links-grid { grid-template-columns: repeat(3, 1fr); } 
+            .lang-toggle-container {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: center;
+                margin-top: 10px;
+                grid-column: 1 / -1;
+            }
+        }
+        
         @media (max-width: 900px) { 
-            .gov-header { grid-template-columns: 1fr; gap: 15px; padding: 20px; }
-            .header-profile.right { justify-content: flex-start; text-align: left; }
+            .gov-header { 
+                grid-template-columns: 1fr; 
+                gap: 15px; 
+                padding: 20px; 
+                text-align: center;
+            }
+            .header-profile, .header-profile.right { 
+                justify-content: center; 
+                text-align: center; 
+            }
+            .header-profile.right { 
+                flex-direction: row-reverse; 
+            }
+            .lang-toggle-container {
+                position: static;
+                margin-top: 10px;
+                justify-content: center;
+            }
             .links-grid { grid-template-columns: repeat(2, 1fr); } 
             .footer-top { grid-template-columns: 1fr 1fr; } 
         }
-        @media (max-width: 600px) { .links-grid { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr; } }
-		/* WhatsApp Feedback Button */
-.whatsapp-feedback {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    background-color: #25d366;
-    color: #fff;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 30px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-}
-
-.whatsapp-feedback:hover {
-    transform: scale(1.1);
-    color: #fff;
-}
-
-/* Tooltip text for WhatsApp */
-.whatsapp-feedback::after {
-    content: "Feedback";
-    position: absolute;
-    left: 70px;
-    background: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s;
-}
-
-.whatsapp-feedback:hover::after {
-    opacity: 1;
-}
+        
+        @media (max-width: 600px) { 
+            .links-grid { grid-template-columns: 1fr); } 
+            .footer-top { grid-template-columns: 1fr); } 
+            .lang-toggle-container {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -238,76 +372,84 @@
         <div class="header-profile">
             <img src="assets/img/dc.jpg" alt="DC Profile" class="gov-photo">
             <div>
-                <div class="gov-name">Smt. Shilpa Sharma, IAS</div>
-                <div class="gov-desig">Deputy Commissioner & District Magistrate</div>
+                <div class="gov-name" data-en="Smt. Shilpa Sharma, IAS" data-kn="ಶ್ರೀಮತಿ ಶಿಲ್ಪಾ ಶರ್ಮಾ, ಐ.ಎ.ಎಸ್">Smt. Shilpa Sharma, IAS</div>
+                <div class="gov-desig" data-en="Deputy Commissioner & District Magistrate" data-kn="ಜಿಲ್ಲಾಧಿಕಾರಿ ಮತ್ತು ಜಿಲ್ಲಾ ಮ್ಯಾಜಿಸ್ಟ್ರೇಟ್">Deputy Commissioner & District Magistrate</div>
             </div>
         </div>
         <div class="header-center">
             <img src="assets/img/logo2.png" style="width: 50px; margin-bottom: 8px;" alt="Emblem">
-            <div class="dept-title">Deputy Commissioner Office, Bidar</div>
-            <div class="dept-sub">REVENUE DEPARTMENT</div>
-            <div class="dept-gov">GOVERNMENT OF KARNATAKA</div>
+            <div class="dept-title" data-en="Deputy Commissioner Office, Bidar" data-kn="ಜಿಲ್ಲಾಧಿಕಾರಿ ಕಚೇರಿ, ಬೀದರ್">Deputy Commissioner Office, Bidar</div>
+            <div class="dept-sub" data-en="REVENUE DEPARTMENT" data-kn="ಕಂದಾಯ ಇಲಾಖೆ">REVENUE DEPARTMENT</div>
+            <div class="dept-gov" data-en="GOVERNMENT OF KARNATAKA" data-kn="ಕರ್ನಾಟಕ ಸರ್ಕಾರ">GOVERNMENT OF KARNATAKA</div>
         </div>
         <div class="header-profile right">
             <div>
-                <div class="gov-name">Sri Shivanand B Karale, KAS</div>
-                <div class="gov-desig">Additional Deputy Commissioner, Bidar</div>
+                <div class="gov-name" data-en="Sri Shivanand B Karale, KAS" data-kn="ಶ್ರೀ ಶಿವಾನಂದ ಬಿ ಕಾರಳೆ, ಕೆ.ಎ.ಎಸ್">Sri Shivanand B Karale, KAS</div>
+                <div class="gov-desig" data-en="Additional Deputy Commissioner, Bidar" data-kn="ಅಪಾರ ಜಿಲ್ಲಾಧಿಕಾರಿ, ಬೀದರ್">Additional Deputy Commissioner, Bidar</div>
             </div>
             <img src="assets/img/adc.jpg" alt="ADC Profile" class="gov-photo">
+        </div>
+        
+        <!-- Language Toggle -->
+        <div class="lang-toggle-container">
+            <span class="lang-label" id="currentLang">English</span>
+            <div class="lang-toggle" id="langToggle">
+                <div class="lang-toggle-handle">EN</div>
+            </div>
         </div>
     </header>
 
     <nav class="main-nav">
         <div class="nav-inner">
             <ul class="nav-menu">
-                <li><a href="#"><i class="bi bi-house-door-fill"></i> Home</a></li>
+                <li><a href="#" data-en="Home" data-kn="ಮುಖಪುಟ"><i class="bi bi-house-door-fill"></i> <span class="nav-text">Home</span></a></li>
                 <li class="has-dropdown">
-                    <button>District Systems <i class="bi bi-caret-down-fill"></i></button>
+                    <button data-en="District Systems" data-kn="ಜಿಲ್ಲಾ ವ್ಯವಸ್ಥೆಗಳು"><span class="nav-text">District Systems</span> <i class="bi bi-caret-down-fill"></i></button>
                     <ul class="dropdown">
-                        <li><a href="Officers.html">Contact Us</a></li>
-                        <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMzg0ZmU4ZDQtMWNiMy00ZjQ5LThiM2QtNGEzYzFkMTFkZGNmIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9">Record Room Report</a></li>
-                        <li><a href="https://bhoomibidar.github.io/calllogsystem/">Call Log System</a></li>
-                        <li><a href="https://bhoomibidar.github.io/parihara/">Parihara Payment</a></li>
+                        <li><a href="Officers.html" data-en="Contact Us" data-kn="ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ">Contact Us</a></li>
+                        <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMzg0ZmU4ZDQtMWNiMy00ZjQ5LThiM2QtNGEzYzFkMTFkZGNmIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9" data-en="Record Room Report" data-kn="ರೆಕಾರ್ಡ್ ಕೊಠಡಿ ವರದಿ">Record Room Report</a></li>
+                        <li><a href="https://bhoomibidar.github.io/calllogsystem/" data-en="Call Log System" data-kn="ಕಾಲ್ ಲಾಗ್ ವ್ಯವಸ್ಥೆ">Call Log System</a></li>
+                        <li><a href="https://bhoomibidar.github.io/parihara/" data-en="Parihara Payment" data-kn="ಪರಿಹಾರ ಪಾವತಿ">Parihara Payment</a></li>
                     </ul>
                 </li>
                 <li class="has-dropdown">
-                    <button>Land Services <i class="bi bi-caret-down-fill"></i></button>
+                    <button data-en="Land Services" data-kn="ಭೂ ಸೇವೆಗಳು"><span class="nav-text">Land Services</span> <i class="bi bi-caret-down-fill"></i></button>
                     <ul class="dropdown">
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Land-Conversion')">Land Conversion</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('RTC-Management')">RTC Management</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Mojini')">Mojini</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Bhoomi')">Bhoomi</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Land-Conversion')" data-en="Land Conversion" data-kn="ಭೂ ಮಾರ್ಪಾಡು">Land Conversion</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('RTC-Management')" data-en="RTC Management" data-kn="ಆರ್.ಟಿ.ಸಿ ನಿರ್ವಹಣೆ">RTC Management</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Mojini')" data-en="Mojini" data-kn="ಮೊಜಿನಿ">Mojini</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Bhoomi')" data-en="Bhoomi" data-kn="ಭೂಮಿ">Bhoomi</a></li>
                     </ul>
                 </li>
-
- <li class="has-dropdown">
-                    <button>Other Applications <i class="bi bi-caret-down-fill"></i></button>
+                <li class="has-dropdown">
+                    <button data-en="Other Applications" data-kn="ಇತರೆ ಅಪ್ಲಿಕೇಶನ್ಗಳು"><span class="nav-text">Other Applications</span> <i class="bi bi-caret-down-fill"></i></button>
                     <ul class="dropdown">
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('RCCMS')">RCCMS</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Sub-Register')">Sub Register</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Record-Room')">Record Room</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Parihara')">Parihara</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Aadhar-Seeding-RTC')">Aadhar Seeding & E-Pouthi</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Bagair-Hukum-Rejection')">Bagair Hukum Rejection</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Bagair-Hukum')">Bagair Hukum</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Form-1-to-5')">Form 1 to 5</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Reports')">Reports</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Ex-Servicemen')">Ex Servicemen</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Land-Availability')">Land Availability</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('Plantation-on-Lease')">Plantation on Lease</a></li>
-                        <li><a href="javascript:void(0)" onclick="scrollToCard('MobileApps')">Mobile Apps</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('RCCMS')" data-en="RCCMS" data-kn="ಆರ್.ಸಿ.ಸಿ.ಎಂ.ಎಸ್">RCCMS</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Sub-Register')" data-en="Sub Register" data-kn="ಸಬ್ ರಿಜಿಸ್ಟರ್">Sub Register</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Record-Room')" data-en="Record Room" data-kn="ರೆಕಾರ್ಡ್ ಕೊಠಡಿ">Record Room</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Parihara')" data-en="Parihara" data-kn="ಪರಿಹಾರ">Parihara</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Aadhar-Seeding-RTC')" data-en="Aadhar Seeding & E-Pouthi" data-kn="ಆಧಾರ ಸೀಡಿಂಗ್ ಮತ್ತು ಇ-ಪೌಠಿ">Aadhar Seeding & E-Pouthi</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Bagair-Hukum-Rejection')" data-en="Bagair Hukum Rejection" data-kn="ಬಗೈರ್ ಹುಕುಂ ನಿರಾಕರಣೆ">Bagair Hukum Rejection</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Bagair-Hukum')" data-en="Bagair Hukum" data-kn="ಬಗೈರ್ ಹುಕುಂ">Bagair Hukum</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Form-1-to-5')" data-en="Form 1 to 5" data-kn="ಫಾರಂ 1 ರಿಂದ 5">Form 1 to 5</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Reports')" data-en="Reports" data-kn="ವರದಿಗಳು">Reports</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Ex-Servicemen')" data-en="Ex Servicemen" data-kn="ಮಾಜಿ ಸೇವಕರು">Ex Servicemen</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Land-Availability')" data-en="Land Availability" data-kn="ಭೂ ಲಭ್ಯತೆ">Land Availability</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('Plantation-on-Lease')" data-en="Plantation on Lease" data-kn="ಕರಾರಿನ ಮೇಲೆ ತೋಟಗಾರಿಕೆ">Plantation on Lease</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToCard('MobileApps')" data-en="Mobile Apps" data-kn="ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್ಗಳು">Mobile Apps</a></li>
                     </ul>
-                </li>                <li><a href="Officers.html" target="_blank">View Officers</a></li>
-                <li><a href="https://app.powerbi.com/view?r=eyJrIjoiYWQ0MzExOGQtYTY4NC00ODUyLTkyOGQtYTU4ZDY1ZDk4YjBkIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9" style="background: var(--brand-gold); color: #000; border-radius: 4px; font-weight: 700;">Parihara Bidar</a></li>
+                </li>
+                <li><a href="Officers.html" target="_blank" data-en="View Officers" data-kn="ಅಧಿಕಾರಿಗಳನ್ನು ವೀಕ್ಷಿಸಿ"><span class="nav-text">View Officers</span></a></li>
+                <li><a href="https://app.powerbi.com/view?r=eyJrIjoiYWQ0MzExOGQtYTY4NC00ODUyLTkyOGQtYTU4ZDY1ZDk4YjBkIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9" style="background: var(--brand-gold); color: #000; border-radius: 4px; font-weight: 700;" data-en="Parihara Bidar" data-kn="ಪರಿಹಾರ ಬೀದರ್">Parihara Bidar</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="announcement-container">
         <div class="announcement-box">
-            <div class="ann-label"><i class="bi bi-megaphone-fill"></i> UPDATES</div>
+            <div class="ann-label"><i class="bi bi-megaphone-fill"></i> <span id="annLabelText">UPDATES</span></div>
             <div class="ann-content" id="annText">
-                Parihara payment disbursement is processed. <a href="https://bhoomibidar.github.io/parihara/" style="color: var(--brand-magenta); text-decoration: underline;">Verify Farmer ID here</a>
+                Parihara payment disbursement is processed. <a href="https://bhoomibidar.github.io/parihara/" style="color: var(--brand-magenta); text-decoration: underline;" data-en="Verify Farmer ID here" data-kn="ರೈತರ ಐಡಿಯನ್ನು ಇಲ್ಲಿ ಪರಿಶೀಲಿಸಿ">Verify Farmer ID here</a>
             </div>
             <div class="ann-controls">
                 <button onclick="prevAnn()"><i class="bi bi-arrow-left-circle-fill"></i></button>
@@ -318,17 +460,17 @@
 
     <section class="hero-section">
         <div class="hero-slider" id="heroSlider">
-            <div class="hero-slide active"><img src="assets/img/photo1.jpg"><div class="hero-caption"><h3>Bidar District Service</h3><p>Land records and citizen services at your fingertips.</p></div></div>
-            <div class="hero-slide"><img src="assets/img/photo2.jpg"><div class="hero-caption"><h3>Field Surveys</h3><p>Online access to survey sketches and RRT reports.</p></div></div>
-            <div class="hero-slide"><img src="assets/img/photo3.jpg"><div class="hero-caption"><h3>Transparent Governance</h3><p>Digitizing land records for public accountability.</p></div></div>
+            <div class="hero-slide active"><img src="assets/img/photo1.jpg"><div class="hero-caption"><h3 data-en="Bidar District Service" data-kn="ಬೀದರ್ ಜಿಲ್ಲಾ ಸೇವೆ">Bidar District Service</h3><p data-en="Land records and citizen services at your fingertips." data-kn="ಭೂ ದಾಖಲೆಗಳು ಮತ್ತು ನಾಗರಿಕ ಸೇವೆಗಳು ನಿಮ್ಮ ಬೆರಳ ತುದಿಯಲ್ಲಿ.">Land records and citizen services at your fingertips.</p></div></div>
+            <div class="hero-slide"><img src="assets/img/photo2.jpg"><div class="hero-caption"><h3 data-en="Field Surveys" data-kn="ಕ್ಷೇತ್ರ ಸರ್ವೇಕ್ಷಣೆಗಳು">Field Surveys</h3><p data-en="Online access to survey sketches and RRT reports." data-kn="ಸರ್ವೇ ಸ್ಕೆಚ್ಗಳು ಮತ್ತು ಆರ್.ಆರ್.ಟಿ ವರದಿಗಳಿಗೆ ಆನ್ಲೈನ್ ಪ್ರವೇಶ.">Online access to survey sketches and RRT reports.</p></div></div>
+            <div class="hero-slide"><img src="assets/img/photo3.jpg"><div class="hero-caption"><h3 data-en="Transparent Governance" data-kn="ಪಾರದರ್ಶಕ ಆಡಳಿತ">Transparent Governance</h3><p data-en="Digitizing land records for public accountability." data-kn="ಸಾರ್ವಜನಿಕ ಜವಾಬ್ದಾರಿಗಾಗಿ ಭೂ ದಾಖಲೆಗಳನ್ನು ಡಿಜಿಟಲ್ ರೂಪಕ್ಕೆ ಪರಿವರ್ತಿಸುವುದು.">Digitizing land records for public accountability.</p></div></div>
         </div>
     </section>
 
     <main class="main-content">
         <div class="grid-header">
-            <h2 style="font-size: 1.2rem; color: var(--brand-magenta);">QUICK SERVICE LINKS</h2>
+            <h2 style="font-size: 1.2rem; color: var(--brand-magenta);" data-en="QUICK SERVICE LINKS" data-kn="ತ್ವರಿತ ಸೇವಾ ಕೊಂಡಿಗಳು">QUICK SERVICE LINKS</h2>
             <div class="search-bar">
-                <input type="text" id="siteSearch" placeholder="Search for a service..." onkeyup="filterServices()">
+                <input type="text" id="siteSearch" placeholder="Search for a service..." data-en="Search for a service..." data-kn="ಸೇವೆಯನ್ನು ಹುಡುಕಿ..." onkeyup="filterServices()">
                 <i class="bi bi-search"></i>
             </div>
         </div>
@@ -336,238 +478,239 @@
         <div class="links-grid" id="linksGrid">
             
             <div class="card" id="Land-Conversion">
-                <h3><i class="bi bi-diagram-3"></i> Land Conversion</h3>
+                <h3><i class="bi bi-diagram-3"></i> <span data-en="Land Conversion" data-kn="ಭೂ ಮಾರ್ಪಾಡು">Land Conversion</span></h3>
                 <ul>
-			 <li><a href="http://landrecords.karnataka.gov.in/rd" target="_blank">Home</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service80" target="_blank">Status</a></li>
-                        <li><a href="https://landconversion.karnataka.gov.in/service99" target="_blank">Order Print</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/citizenportal/" target="_blank">Citizen Login</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service132/Home/Report" target="_blank">Approved Dates</a></li>
-                        <li><a href="https://landconversion.karnataka.gov.in/Service74/afdlcreport/" target="_blank">Report with Userid</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service52/" target="_blank">Patta Land</a></li>
-                        <li><a href="https://drive.google.com/file/d/1kfVSS16jLfueQHF93jD4UqA5TvapA22n/view" target="_blank">User Manual</a></li>
+			 <li><a href="http://landrecords.karnataka.gov.in/rd" target="_blank" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service80" target="_blank" data-en="Status" data-kn="ಸ್ಥಿತಿ">Status</a></li>
+                        <li><a href="https://landconversion.karnataka.gov.in/service99" target="_blank" data-en="Order Print" data-kn="ಆದೇಶ ಮುದ್ರಣ">Order Print</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/citizenportal/" target="_blank" data-en="Citizen Login" data-kn="ನಾಗರಿಕ ಲಾಗಿನ್">Citizen Login</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service132/Home/Report" target="_blank" data-en="Approved Dates" data-kn="ಅನುಮೋದಿತ ದಿನಾಂಕಗಳು">Approved Dates</a></li>
+                        <li><a href="https://landconversion.karnataka.gov.in/Service74/afdlcreport/" target="_blank" data-en="Report with Userid" data-kn="ಬಳಕೆದಾರ ಐಡಿ ಸಹಿತ ವರದಿ">Report with Userid</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service52/" target="_blank" data-en="Patta Land" data-kn="ಪಟ್ಟ ಭೂಮಿ">Patta Land</a></li>
+                        <li><a href="https://drive.google.com/file/d/1kfVSS16jLfueQHF93jD4UqA5TvapA22n/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
 
 		</ul>
             </div>
             <div class="card" id="RTC-Management">
-                <h3><i class="bi bi-hdd-stack"></i> RTC Mgmt</h3>
+                <h3><i class="bi bi-hdd-stack"></i> <span data-en="RTC Mgmt" data-kn="ಆರ್.ಟಿ.ಸಿ ನಿರ್ವಹಣೆ">RTC Mgmt</span></h3>
                 <ul>
-			<li><a href="https://landrecords.karnataka.gov.in/Service109/rtcmgm/" target="_blank">Home</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service109/rrtcorrection/ " target="_blank">RRT Correction</a></li>
-                        <li><a href="https://docs.google.com/document/d/13DuohMS4SfsbplyqEV-fe_l1tn8DWGsJ/edit?usp=sharing&ouid=102203191778081510294&rtpof=true&sd=true" target="_blank">RRT Manual</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service109/rtc_mgm_mis/" target="_blank">Report &amp; Status</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service85/Login1.aspx" target="_blank">Old Jslip Approval AC</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/service82/" target="_blank">SLAO Case Worker</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/service83" target="_blank">SLAO Login</a></li>
-                        <li><a href="https://drive.google.com/file/d/1ijq0FEE7QNTJ9BG_QC0HdEZeCxgiPsE6/view" target="_blank">User Manual</a></li>
+			<li><a href="https://landrecords.karnataka.gov.in/Service109/rtcmgm/" target="_blank" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service109/rrtcorrection/ " target="_blank" data-en="RRT Correction" data-kn="ಆರ್.ಆರ್.ಟಿ ತಿದ್ದುಪಡಿ">RRT Correction</a></li>
+                        <li><a href="https://docs.google.com/document/d/13DuohMS4SfsbplyqEV-fe_l1tn8DWGsJ/edit?usp=sharing&ouid=102203191778081510294&rtpof=true&sd=true" target="_blank" data-en="RRT Manual" data-kn="ಆರ್.ಆರ್.ಟಿ ಮಾರ್ಗದರ್ಶಿ">RRT Manual</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service109/rtc_mgm_mis/" target="_blank" data-en="Report & Status" data-kn="ವರದಿ ಮತ್ತು ಸ್ಥಿತಿ">Report & Status</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service85/Login1.aspx" target="_blank" data-en="Old Jslip Approval AC" data-kn="ಹಳೆಯ ಜೆಸ್ಲಿಪ್ ಅನುಮೋದನೆ ಎಸಿ">Old Jslip Approval AC</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/service82/" target="_blank" data-en="SLAO Case Worker" data-kn="ಎಸ್.ಎಲ್.ಎ.ಓ ಕೇಸ್ ವರ್ಕರ್">SLAO Case Worker</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/service83" target="_blank" data-en="SLAO Login" data-kn="ಎಸ್.ಎಲ್.ಎ.ಓ ಲಾಗಿನ್">SLAO Login</a></li>
+                        <li><a href="https://drive.google.com/file/d/1ijq0FEE7QNTJ9BG_QC0HdEZeCxgiPsE6/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
 		</ul>
             </div>
             <div class="card" id="Mojini">
-                <h3><i class="bi bi-rulers"></i> Mojini</h3>
+                <h3><i class="bi bi-rulers"></i> <span data-en="Mojini" data-kn="ಮೊಜಿನಿ">Mojini</span></h3>
                 <ul>
-                        <li><a href="https://www.rdservices.karnataka.gov.in/" target="_blank">Home</a></li>
-                        <li><a href="https://bhoomojini.karnataka.gov.in/SERVICE30/RRTCase/RRT_Report" target="_blank">Datewise Report</a></li>
-                        <li><a href="https://bhoomojini.karnataka.gov.in/service24/" target="_blank">RRT &amp; LND Report</a></li>
-                        <li><a href="https://bhoomojini.karnataka.gov.in/service19/" target="_blank">View Sketch</a></li>
-                        <li><a href="https://bhoomojini.karnataka.gov.in/service39/" target="_blank">Akarband</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/Service10" target="_blank">Phodi Status and Report</a></li>
-                        <li><a href="https://bhoomojini.karnataka.gov.in/service19/report/Applicationdetails" target="_blank">Sketch Printing</a></li>
-                        <li><a href="https://bhoomojini.karnataka.gov.in/oscitizen/" target="_blank">Survey Documents For Citizen</a></li>
+                        <li><a href="https://www.rdservices.karnataka.gov.in/" target="_blank" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a></li>
+                        <li><a href="https://bhoomojini.karnataka.gov.in/SERVICE30/RRTCase/RRT_Report" target="_blank" data-en="Datewise Report" data-kn="ದಿನಾಂಕಾನುಸಾರ ವರದಿ">Datewise Report</a></li>
+                        <li><a href="https://bhoomojini.karnataka.gov.in/service24/" target="_blank" data-en="RRT & LND Report" data-kn="ಆರ್.ಆರ್.ಟಿ ಮತ್ತು ಎಲ್.ಎನ್.ಡಿ ವರದಿ">RRT & LND Report</a></li>
+                        <li><a href="https://bhoomojini.karnataka.gov.in/service19/" target="_blank" data-en="View Sketch" data-kn="ಸ್ಕೆಚ್ ವೀಕ್ಷಿಸಿ">View Sketch</a></li>
+                        <li><a href="https://bhoomojini.karnataka.gov.in/service39/" target="_blank" data-en="Akarband" data-kn="ಅಕರ್ಬಂದ್">Akarband</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/Service10" target="_blank" data-en="Phodi Status and Report" data-kn="ಫೋಡಿ ಸ್ಥಿತಿ ಮತ್ತು ವರದಿ">Phodi Status and Report</a></li>
+                        <li><a href="https://bhoomojini.karnataka.gov.in/service19/report/Applicationdetails" target="_blank" data-en="Sketch Printing" data-kn="ಸ್ಕೆಚ್ ಮುದ್ರಣ">Sketch Printing</a></li>
+                        <li><a href="https://bhoomojini.karnataka.gov.in/oscitizen/" target="_blank" data-en="Survey Documents For Citizen" data-kn="ನಾಗರಿಕರಿಗಾಗಿ ಸರ್ವೇ ದಾಖಲೆಗಳು">Survey Documents For Citizen</a></li>
                     </ul>
 
             </div>
             <div class="card" id="Bhoomi">
-                <h3><i class="bi bi-globe2"></i> Bhoomi</h3>
+                <h3><i class="bi bi-globe2"></i> <span data-en="Bhoomi" data-kn="ಭೂಮಿ">Bhoomi</span></h3>
                  <ul>
-                        <li><a href="https://www.govtanalytics.karnataka.gov.in/bhoomidi/" target="_blank">DI Ranking</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/Service147/" target="_blank">Pendancy</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service60/" target="_blank">Mutation Status</a></li>
-                        <li><a href="https://www.landrecords.karnataka.gov.in/service40/" target="_blank">Report Villagewise</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/Service121" target="_blank">Mutation Report</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service7/" target="_blank">Bhoomi Report</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service10/" target="_blank">Mojini-Phody Status Online</a></li>
+                        <li><a href="https://www.govtanalytics.karnataka.gov.in/bhoomidi/" target="_blank" data-en="DI Ranking" data-kn="ಡಿ.ಐ ರ್ಯಾಂಕಿಂಗ್">DI Ranking</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/Service147/" target="_blank" data-en="Pendancy" data-kn="ಬಾಕಿ">Pendancy</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service60/" target="_blank" data-en="Mutation Status" data-kn="ಮ್ಯುಟೇಶನ್ ಸ್ಥಿತಿ">Mutation Status</a></li>
+                        <li><a href="https://www.landrecords.karnataka.gov.in/service40/" target="_blank" data-en="Report Villagewise" data-kn="ಗ್ರಾಮವಾರು ವರದಿ">Report Villagewise</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/Service121" target="_blank" data-en="Mutation Report" data-kn="ಮ್ಯುಟೇಶನ್ ವರದಿ">Mutation Report</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service7/" target="_blank" data-en="Bhoomi Report" data-kn="ಭೂಮಿ ವರದಿ">Bhoomi Report</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service10/" target="_blank" data-en="Mojini-Phody Status Online" data-kn="ಮೊಜಿನಿ-ಫೋಡಿ ಸ್ಥಿತಿ ಆನ್ಲೈನ್">Mojini-Phody Status Online</a></li>
                     </ul>
 
             </div>
             <div class="card" id="Bagair-Hukum-Rejection">
-                <h3><i class="bi bi-slash-circle"></i> BH Rejection</h3>
+                <h3><i class="bi bi-slash-circle"></i> <span data-en="BH Rejection" data-kn="ಬಿ.ಎಚ್ ನಿರಾಕರಣೆ">BH Rejection</span></h3>
                 <ul>
-                        <li><a href="https://rdservices.karnataka.gov.in/service43" target="_blank">VAO Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service88" target="_blank">RI Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service89" target="_blank">DT Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service52" target="_blank">DCCW</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service52" target="_blank">Tahsildar</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service52" target="_blank">DC</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service43" target="_blank" data-en="VAO Login" data-kn="ವಿ.ಎ.ಓ ಲಾಗಿನ್">VAO Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service88" target="_blank" data-en="RI Login" data-kn="ಆರ್.ಐ ಲಾಗಿನ್">RI Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service89" target="_blank" data-en="DT Login" data-kn="ಡಿ.ಟಿ ಲಾಗಿನ್">DT Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service52" target="_blank" data-en="DCCW" data-kn="ಡಿ.ಸಿ.ಸಿ.ಡಬ್ಲ್ಯೂ">DCCW</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service52" target="_blank" data-en="Tahsildar" data-kn="ತಹಸೀಲ್ದಾರ್">Tahsildar</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service52" target="_blank" data-en="DC" data-kn="ಡಿ.ಸಿ">DC</a></li>
                     </ul>
 
             </div>
 
             <div class="card" id="Land-Beat">
-                <h3><i class="bi bi-shield-check"></i> Land Beat</h3>
+                <h3><i class="bi bi-shield-check"></i> <span data-en="Land Beat" data-kn="ಭೂ ಬೀಟ್">Land Beat</span></h3>
                 <ul>
-                        <li><a href="https://rdservices.karnataka.gov.in/service57" target="_blank">RI Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service57" target="_blank">Tahsildar</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service55" target="_blank">Reports</a></li>
-                        <li><a href="https://drive.google.com/file/d/1f0d_0vNj2lumqXyhIcpCEaiSozKlQP15/view" target="_blank">User Manual</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service57" target="_blank" data-en="RI Login" data-kn="ಆರ್.ಐ ಲಾಗಿನ್">RI Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service57" target="_blank" data-en="Tahsildar" data-kn="ತಹಸೀಲ್ದಾರ್">Tahsildar</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service55" target="_blank" data-en="Reports" data-kn="ವರದಿಗಳು">Reports</a></li>
+                        <li><a href="https://drive.google.com/file/d/1f0d_0vNj2lumqXyhIcpCEaiSozKlQP15/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
                     </ul>
 
             </div>
             <div class="card" id="RTC-Online">
-                <h3><i class="bi bi-reception-4"></i> RTC Online</h3>
+                <h3><i class="bi bi-reception-4"></i> <span data-en="RTC Online" data-kn="ಆರ್.ಟಿ.ಸಿ ಆನ್ಲೈನ್">RTC Online</span></h3>
                	<ul>
-                        <li><a href="https://landrecords.karnataka.gov.in/Service2/" target="_blank">RTC, MR, Mutation</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service40/PendcySurveyNoWiseRpt" target="_blank">MR History</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service150" target="_blank">RTC for VAO</a></li>
-                        <li><a href="https://rdreports.karnataka.gov.in/" target="_blank">RTC Detailed Report</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/Service2/" target="_blank" data-en="RTC, MR, Mutation" data-kn="ಆರ್.ಟಿ.ಸಿ, ಎಂ.ಆರ್, ಮ್ಯುಟೇಶನ್">RTC, MR, Mutation</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service40/PendcySurveyNoWiseRpt" target="_blank" data-en="MR History" data-kn="ಎಂ.ಆರ್ ಇತಿಹಾಸ">MR History</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service150" target="_blank" data-en="RTC for VAO" data-kn="ವಿ.ಎ.ಓ ಗಾಗಿ ಆರ್.ಟಿ.ಸಿ">RTC for VAO</a></li>
+                        <li><a href="https://rdreports.karnataka.gov.in/" target="_blank" data-en="RTC Detailed Report" data-kn="ಆರ್.ಟಿ.ಸಿ ವಿವರವಾದ ವರದಿ">RTC Detailed Report</a></li>
                 </ul>
 
             </div>
             <div class="card" id="Record-Room">
-                <h3><i class="bi bi-inboxes-fill"></i> Record Room</h3>
+                <h3><i class="bi bi-inboxes-fill"></i> <span data-en="Record Room" data-kn="ರೆಕಾರ್ಡ್ ಕೊಠಡಿ">Record Room</span></h3>
                     <ul>
-                        <li><a href="https://recordroom.karnataka.gov.in/ERECORDROOM/" target="_blank">Home</a></li>
-                        <li><a href="https://recordroom.karnataka.gov.in/reports" target="_blank">Reports</a></li>
-                        <li><a href="https://drive.google.com/file/d/1JrxZr50PYNiG4wF_Flt_zWr0HCxoALr4/view" target="_blank">User Manual</a></li>
-                        <li><a href="https://drive.google.com/file/d/1XkqOQrtxGxLF1j4Wf2dU4SE53h3VqG4a/view" target="_blank">Manual</a></li>
-						<li><a href="https://drive.google.com/drive/folders/1CGJ7LMfI5eA2n-nfUgHgxLVwSHb-CuEw?usp=sharing">Circular & Training Materials</a></li>
+                        <li><a href="https://recordroom.karnataka.gov.in/ERECORDROOM/" target="_blank" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a></li>
+                        <li><a href="https://recordroom.karnataka.gov.in/reports" target="_blank" data-en="Reports" data-kn="ವರದಿಗಳು">Reports</a></li>
+                        <li><a href="https://drive.google.com/file/d/1JrxZr50PYNiG4wF_Flt_zWr0HCxoALr4/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
+                        <li><a href="https://drive.google.com/file/d/1XkqOQrtxGxLF1j4Wf2dU4SE53h3VqG4a/view" target="_blank" data-en="Manual" data-kn="ಮಾರ್ಗದರ್ಶಿ">Manual</a></li>
+						<li><a href="https://drive.google.com/drive/folders/1CGJ7LMfI5eA2n-nfUgHgxLVwSHb-CuEw?usp=sharing" data-en="Circular & Training Materials" data-kn="ಪರಿಪತ್ರೆ ಮತ್ತು ತರಬೇತಿ ಸಾಮಗ್ರಿಗಳು">Circular & Training Materials</a></li>
 						
                     </ul>
             </div>
             <div class="card" id="Ex-Servicemen">
-                <h3><i class="bi bi-person-lines-fill"></i> Ex Servicemen</h3>
+                <h3><i class="bi bi-person-lines-fill"></i> <span data-en="Ex Servicemen" data-kn="ಮಾಜಿ ಸೇವಕರು">Ex Servicemen</span></h3>
                  <ul>
-                        <li><a href="https://landrecords.karnataka.gov.in/Service155/exsm/" target="_blank">Data Entry</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service155/ExsmMisReport" target="_blank">Report</a></li>
-                        <li><a href="https://drive.google.com/file/d/1gNATgoBeNELIc7qH3Td-8585XdV8qu8B/view" target="_blank">User Manual</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/Service155/exsm/" target="_blank" data-en="Data Entry" data-kn="ಡೇಟಾ ಎಂಟ್ರಿ">Data Entry</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service155/ExsmMisReport" target="_blank" data-en="Report" data-kn="ವರದಿ">Report</a></li>
+                        <li><a href="https://drive.google.com/file/d/1gNATgoBeNELIc7qH3Td-8585XdV8qu8B/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
                     </ul>
 
             </div>
             <div class="card" id="Sub-Register">
-                <h3><i class="bi bi-file-lock"></i> Sub Register</h3>
+                <h3><i class="bi bi-file-lock"></i> <span data-en="Sub Register" data-kn="ಸಬ್ ರಿಜಿಸ್ಟರ್">Sub Register</span></h3>
                   <ul>
-                        <li><a href="https://landrecords.karnataka.gov.in/service146" target="_blank">Jslip Status</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service159" target="_blank">Eswathu Status</a></li>
-                        <li><a href="https://eswathu.karnataka.gov.in/Issue0fForm9/Frm_PublicSearchForm9.aspx" target="_blank">Status</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service146" target="_blank" data-en="Jslip Status" data-kn="ಜೆಸ್ಲಿಪ್ ಸ್ಥಿತಿ">Jslip Status</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service159" target="_blank" data-en="Eswathu Status" data-kn="ಎಸ್ವತು ಸ್ಥಿತಿ">Eswathu Status</a></li>
+                        <li><a href="https://eswathu.karnataka.gov.in/Issue0fForm9/Frm_PublicSearchForm9.aspx" target="_blank" data-en="Status" data-kn="ಸ್ಥಿತಿ">Status</a></li>
                     </ul>
             </div>
 
             <div class="card" id="Parihara">
-                <h3><i class="bi bi-bank2"></i> Parihara</h3>
+                <h3><i class="bi bi-bank2"></i> <span data-en="Parihara" data-kn="ಪರಿಹಾರ">Parihara</span></h3>
                 <ul>
-                        <li><a href="https://parihara.karnataka.gov.in/Pariharahome/" target="_blank">Home</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/service89/PaymentDetailsReport.aspx" target="_blank">Payment Details</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/service92" target="_blank">Payment Status</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/PariharaPayment/" target="_blank">Payment</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/service22/" target="_blank">Data Entry Progress</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/pariharausermgmt" target="_blank">User Management</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/CropCollectionVAO" target="_blank">Crop Data Entry VAO</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/CropCollectionTah/" target="_blank">Approval Tahsildar</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/pariharatahsildara" target="_blank">Name Mismatch Tahsildar</a></li>
-                        <li><a href="https://parihara.karnataka.gov.in/CropReportApproval/" target="_blank">DC &amp; AC Approval</a></li>
-                        <li><a href="https://drive.google.com/file/d/1NEetYkRn0Ix9NkwoooQbngY9lX5-QYw8/view?usp=sharing" target="_blank">User Manual</a></li>
-                        <li><a href="https://drive.google.com/file/d/1AHGixWu0GMaNLMKhQaUCLpYJSRsAb23O/view?usp=sharing" target="_blank">VAO Crop Collection</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/Pariharahome/" target="_blank" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/service89/PaymentDetailsReport.aspx" target="_blank" data-en="Payment Details" data-kn="ಪಾವತಿ ವಿವರಗಳು">Payment Details</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/service92" target="_blank" data-en="Payment Status" data-kn="ಪಾವತಿ ಸ್ಥಿತಿ">Payment Status</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/PariharaPayment/" target="_blank" data-en="Payment" data-kn="ಪಾವತಿ">Payment</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/service22/" target="_blank" data-en="Data Entry Progress" data-kn="ಡೇಟಾ ಎಂಟ್ರಿ ಪ್ರಗತಿ">Data Entry Progress</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/pariharausermgmt" target="_blank" data-en="User Management" data-kn="ಬಳಕೆದಾರ ನಿರ್ವಹಣೆ">User Management</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/CropCollectionVAO" target="_blank" data-en="Crop Data Entry VAO" data-kn="ಬೆಳೆ ಡೇಟಾ ಎಂಟ್ರಿ ವಿ.ಎ.ಓ">Crop Data Entry VAO</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/CropCollectionTah/" target="_blank" data-en="Approval Tahsildar" data-kn="ಅನುಮೋದನೆ ತಹಸೀಲ್ದಾರ್">Approval Tahsildar</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/pariharatahsildara" target="_blank" data-en="Name Mismatch Tahsildar" data-kn="ಹೆಸರು ಹೊಂದಾಣಿಕೆಯಾಗದ ತಹಸೀಲ್ದಾರ್">Name Mismatch Tahsildar</a></li>
+                        <li><a href="https://parihara.karnataka.gov.in/CropReportApproval/" target="_blank" data-en="DC & AC Approval" data-kn="ಡಿ.ಸಿ ಮತ್ತು ಎ.ಸಿ ಅನುಮೋದನೆ">DC & AC Approval</a></li>
+                        <li><a href="https://drive.google.com/file/d/1NEetYkRn0Ix9NkwoooQbngY9lX5-QYw8/view?usp=sharing" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
+                        <li><a href="https://drive.google.com/file/d/1AHGixWu0GMaNLMKhQaUCLpYJSRsAb23O/view?usp=sharing" target="_blank" data-en="VAO Crop Collection" data-kn="ವಿ.ಎ.ಓ ಬೆಳೆ ಸಂಗ್ರಹಣೆ">VAO Crop Collection</a></li>
                     </ul>
 
             </div>
             <div class="card" id="Bagair-Hukum">
-                <h3><i class="bi bi-newspaper"></i> Bagair Hukum</h3>
+                <h3><i class="bi bi-newspaper"></i> <span data-en="Bagair Hukum" data-kn="ಬಗೈರ್ ಹುಕುಂ">Bagair Hukum</span></h3>
                 <ul>
-                        <li><a href="https://rdservices.karnataka.gov.in/service54" target="_blank">Main website</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service43" target="_blank">VAO Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank">RI Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank">DT Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank">Tahsildar Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank">Committee</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank">TCCW</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service87" target="_blank">Application Status</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service131/form57/" target="_blank">Form 57 Report</a></li>
-                        <li><a href="https://bhoomi.karnataka.gov.in/FORM5053/" target="_blank">Form 50 53 Count</a></li>
-                        <li><a href="https://bhoomojini.karnataka.gov.in/service55" target="_blank">BH Mojini Status</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service149" target="_blank">Form 50 &amp; 53 Rec Cases</a></li>
-                        <li><a href="https://docs.google.com/presentation/d/1yTfMzC8J0UYHy14w69OnfOXF-5gnXRXG/edit#slide=id.p1" target="_blank">User Manual</a></li>
-                        <li><a href="https://drive.google.com/file/d/1X7xGaE1umvzLI2BNqEE2LpJPkr2vpKHv/view" target="_blank">Work Flow</a></li>
-					    <li><a href="https://docs.google.com/document/d/1-qp-qt2BWje2nBvibKgBgvYSX93eB0qz/edit?usp=sharing&ouid=102203191778081510294&rtpof=true&sd=true">BH Offline Manual</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service54" target="_blank" data-en="Main website" data-kn="ಮುಖ್ಯ ವೆಬ್ಸೈಟ್">Main website</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service43" target="_blank" data-en="VAO Login" data-kn="ವಿ.ಎ.ಓ ಲಾಗಿನ್">VAO Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank" data-en="RI Login" data-kn="ಆರ್.ಐ ಲಾಗಿನ್">RI Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank" data-en="DT Login" data-kn="ಡಿ.ಟಿ ಲಾಗಿನ್">DT Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank" data-en="Tahsildar Login" data-kn="ತಹಸೀಲ್ದಾರ್ ಲಾಗಿನ್">Tahsildar Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank" data-en="Committee" data-kn="ಕಮಿಟಿ">Committee</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service45" target="_blank" data-en="TCCW" data-kn="ಟಿ.ಸಿ.ಸಿ.ಡಬ್ಲ್ಯೂ">TCCW</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service87" target="_blank" data-en="Application Status" data-kn="ಅರ್ಜಿ ಸ್ಥಿತಿ">Application Status</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service131/form57/" target="_blank" data-en="Form 57 Report" data-kn="ಫಾರಂ 57 ವರದಿ">Form 57 Report</a></li>
+                        <li><a href="https://bhoomi.karnataka.gov.in/FORM5053/" target="_blank" data-en="Form 50 53 Count" data-kn="ಫಾರಂ 50 53 ಎಣಿಕೆ">Form 50 53 Count</a></li>
+                        <li><a href="https://bhoomojini.karnataka.gov.in/service55" target="_blank" data-en="BH Mojini Status" data-kn="ಬಿ.ಎಚ್ ಮೊಜಿನಿ ಸ್ಥಿತಿ">BH Mojini Status</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service149" target="_blank" data-en="Form 50 & 53 Rec Cases" data-kn="ಫಾರಂ 50 ಮತ್ತು 53 ರೆಕ್ ಪ್ರಕರಣಗಳು">Form 50 & 53 Rec Cases</a></li>
+                        <li><a href="https://docs.google.com/presentation/d/1yTfMzC8J0UYHy14w69OnfOXF-5gnXRXG/edit#slide=id.p1" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
+                        <li><a href="https://drive.google.com/file/d/1X7xGaE1umvzLI2BNqEE2LpJPkr2vpKHv/view" target="_blank" data-en="Work Flow" data-kn="ಕಾರ್ಯ ಹರಿವು">Work Flow</a></li>
+					    <li><a href="https://docs.google.com/document/d/1-qp-qt2BWje2nBvibKgBgvYSX93eB0qz/edit?usp=sharing&ouid=102203191778081510294&rtpof=true&sd=true" data-en="BH Offline Manual" data-kn="ಬಿ.ಎಚ್ ಆಫ್ಲೈನ್ ಮಾರ್ಗದರ್ಶಿ">BH Offline Manual</a></li>
                     </ul>
             </div>
             <div class="card" id="Form-1-to-5">
-                <h3><i class="bi bi-journal-text"></i> Form 1 to 5</h3>
+                <h3><i class="bi bi-journal-text"></i> <span data-en="Form 1 to 5" data-kn="ಫಾರಂ 1 ರಿಂದ 5">Form 1 to 5</span></h3>
                  <ul>
-                        <li><a href="https://rdservices.karnataka.gov.in/service73" target="_blank">Shirestedar</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service72" target="_blank">VAO</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service75" target="_blank">RI</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service76" target="_blank">Tahsildar</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service79" target="_blank">ADLR</a></li>
-                        <li><a href="https://drive.google.com/file/d/1mVmhPfuAi2C-h2sxIjC7gjs-2zNjq8eS/view" target="_blank">User Manual</a></li>
-                        <li><a href="https://drive.google.com/file/d/1DSkH85TNgINg4zDQsdmd8WbRQyoGlag-/view" target="_blank">Work Flow</a></li>
-                        <li><a href="https://drive.google.com/file/d/1Pihc2p3_1M5I6i0LADe1j8SWp6KzTYyw/view" target="_blank">DFO &amp; Tahsildar</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service77" target="_blank">AC</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service78" target="_blank">DDLR</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service95" target="_blank">DC</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service73" target="_blank" data-en="Shirestedar" data-kn="ಶಿರಸ್ತೇದಾರ್">Shirestedar</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service72" target="_blank" data-en="VAO" data-kn="ವಿ.ಎ.ಓ">VAO</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service75" target="_blank" data-en="RI" data-kn="ಆರ್.ಐ">RI</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service76" target="_blank" data-en="Tahsildar" data-kn="ತಹಸೀಲ್ದಾರ್">Tahsildar</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service79" target="_blank" data-en="ADLR" data-kn="ಎ.ಡಿ.ಎಲ್.ಆರ್">ADLR</a></li>
+                        <li><a href="https://drive.google.com/file/d/1mVmhPfuAi2C-h2sxIjC7gjs-2zNjq8eS/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
+                        <li><a href="https://drive.google.com/file/d/1DSkH85TNgINg4zDQsdmd8WbRQyoGlag-/view" target="_blank" data-en="Work Flow" data-kn="ಕಾರ್ಯ ಹರಿವು">Work Flow</a></li>
+                        <li><a href="https://drive.google.com/file/d/1Pihc2p3_1M5I6i0LADe1j8SWp6KzTYyw/view" target="_blank" data-en="DFO & Tahsildar" data-kn="ಡಿ.ಎಫ್.ಓ ಮತ್ತು ತಹಸೀಲ್ದಾರ್">DFO & Tahsildar</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service77" target="_blank" data-en="AC" data-kn="ಎ.ಸಿ">AC</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service78" target="_blank" data-en="DDLR" data-kn="ಡಿ.ಡಿ.ಎಲ್.ಆರ್">DDLR</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service95" target="_blank" data-en="DC" data-kn="ಡಿ.ಸಿ">DC</a></li>
                     </ul>
 
             </div>
             <div class="card" id="Reports">
-                <h3><i class="bi bi-clipboard-data"></i> Reports</h3>
+                <h3><i class="bi bi-clipboard-data"></i> <span data-en="Reports" data-kn="ವರದಿಗಳು">Reports</span></h3>
                 <ul>
-                        <li><a href="https://rdservices.karnataka.gov.in/service81" target="_blank">1 to 5 Report</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/Service51/" target="_blank">Bagair Hukum</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service63" target="_blank">Aadhar Seeding</a></li>
- 			<li><a href="https://rdservices.karnataka.gov.in/AadharReport_test/AadharSeeding/EPautiBifercationReport">Pouthi Report</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service55" target="_blank">Land Beat</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/Service68" target="_blank">Hakku Patra</a></li>
-					    <li><a href="https://drive.google.com/drive/folders/14TNdy0LzMdIcsx5sjEWiYcDEaXvIO_ry?usp=sharing"_blank">Hakku Patra Manual</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service147/bhoomipendency/" target="_blank">Bhoomi Pendancy</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service110" target="_blank">MIS RTC, 3 &amp; 9, Pyki Mismatch</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/bhoomigis/" target="_blank">Bhoomi GIS</a></li>
-                        <li><a href="https://landrecords.karnataka.gov.in/service154/" target="_blank">RTC and Mutation Extract</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service81" target="_blank" data-en="1 to 5 Report" data-kn="1 ರಿಂದ 5 ವರದಿ">1 to 5 Report</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/Service51/" target="_blank" data-en="Bagair Hukum" data-kn="ಬಗೈರ್ ಹುಕುಂ">Bagair Hukum</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service63" target="_blank" data-en="Aadhar Seeding" data-kn="ಆಧಾರ ಸೀಡಿಂಗ್">Aadhar Seeding</a></li>
+ 			<li><a href="https://rdservices.karnataka.gov.in/AadharReport_test/AadharSeeding/EPautiBifercationReport" data-en="Pouthi Report" data-kn="ಪೌಠಿ ವರದಿ">Pouthi Report</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service55" target="_blank" data-en="Land Beat" data-kn="ಭೂ ಬೀಟ್">Land Beat</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/Service68" target="_blank" data-en="Hakku Patra" data-kn="ಹಕ್ಕು ಪತ್ರ">Hakku Patra</a></li>
+					    <li><a href="https://drive.google.com/drive/folders/14TNdy0LzMdIcsx5sjEWiYcDEaXvIO_ry?usp=sharing" data-en="Hakku Patra Manual" data-kn="ಹಕ್ಕು ಪತ್ರ ಮಾರ್ಗದರ್ಶಿ">Hakku Patra Manual</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service147/bhoomipendency/" target="_blank" data-en="Bhoomi Pendancy" data-kn="ಭೂಮಿ ಬಾಕಿ">Bhoomi Pendancy</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service110" target="_blank" data-en="MIS RTC, 3 & 9, Pyki Mismatch" data-kn="ಎಂ.ಐ.ಎಸ್ ಆರ್.ಟಿ.ಸಿ, 3 & 9, ಪೈಕಿ ಹೊಂದಾಣಿಕೆಯಾಗದ">MIS RTC, 3 & 9, Pyki Mismatch</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/bhoomigis/" target="_blank" data-en="Bhoomi GIS" data-kn="ಭೂಮಿ ಜಿ.ಐ.ಎಸ್">Bhoomi GIS</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/service154/" target="_blank" data-en="RTC and Mutation Extract" data-kn="ಆರ್.ಟಿ.ಸಿ ಮತ್ತು ಮ್ಯುಟೇಶನ್ ಎಕ್ಸ್ಟ್ರಾಕ್ಟ್">RTC and Mutation Extract</a></li>
                     </ul>
 
             </div>
             <div class="card" id="Aadhar-Seeding-RTC">
-                <h3><i class="bi bi-qr-code-scan"></i> Aadhar/E-Pouthi</h3>
+                <h3><i class="bi bi-qr-code-scan"></i> <span data-en="Aadhar/E-Pouthi" data-kn="ಆಧಾರ/ಇ-ಪೌಠಿ">Aadhar/E-Pouthi</span></h3>
                 <ul>
-                        <li><a href="https://rdservices.karnataka.gov.in/service62" target="_blank">VAO Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service124" target="_blank">E-Pouhti RI and SHR Login</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service82" target="_blank">Status</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/service63" target="_blank">Reports</a></li>
-                        <li><a href="https://drive.google.com/file/d/1KTZne5fnaX9SsUvRpChqW7EBJjaKdrEm/view" target="_blank">User Manual</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/Service63/AadharSeeding/EPautiKhataProgressReport" target="_blank">E-Pouthi Reports</a></li>
-                        <li><a href="https://drive.google.com/file/d/12I5-u-BUX-c-K9YJudGaF86XMimTFfl_/view" target="_blank">RTC Verification Manual</a></li>
-                        <li><a href="https://drive.google.com/file/d/1MWWPpKqGntN0jjGOkxRqC9MuFcm31Vpi/view" target="_blank">E Pouthi VAO User Manual</a></li>
-                        <li><a href="https://drive.google.com/file/d/1SZrmBv4P9c7S3U5Jp7g4Jj4EDMTp3HDL/view" target="_blank">E Pouthi RI and SHR User Manual</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service62" target="_blank" data-en="VAO Login" data-kn="ವಿ.ಎ.ಓ ಲಾಗಿನ್">VAO Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service124" target="_blank" data-en="E-Pouhti RI and SHR Login" data-kn="ಇ-ಪೌಠಿ ಆರ್.ಐ ಮತ್ತು ಎಸ್.ಎಚ್.ಆರ್ ಲಾಗಿನ್">E-Pouhti RI and SHR Login</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service82" target="_blank" data-en="Status" data-kn="ಸ್ಥಿತಿ">Status</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/service63" target="_blank" data-en="Reports" data-kn="ವರದಿಗಳು">Reports</a></li>
+                        <li><a href="https://drive.google.com/file/d/1KTZne5fnaX9SsUvRpChqW7EBJjaKdrEm/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/Service63/AadharSeeding/EPautiKhataProgressReport" target="_blank" data-en="E-Pouthi Reports" data-kn="ಇ-ಪೌಠಿ ವರದಿಗಳು">E-Pouthi Reports</a></li>
+                        <li><a href="https://drive.google.com/file/d/12I5-u-BUX-c-K9YJudGaF86XMimTFfl_/view" target="_blank" data-en="RTC Verification Manual" data-kn="ಆರ್.ಟಿ.ಸಿ ಪರಿಶೀಲನೆ ಮಾರ್ಗದರ್ಶಿ">RTC Verification Manual</a></li>
+                        <li><a href="https://drive.google.com/file/d/1MWWPpKqGntN0jjGOkxRqC9MuFcm31Vpi/view" target="_blank" data-en="E Pouthi VAO User Manual" data-kn="ಇ ಪೌಠಿ ವಿ.ಎ.ಓ ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">E Pouthi VAO User Manual</a></li>
+                        <li><a href="https://drive.google.com/file/d/1SZrmBv4P9c7S3U5Jp7g4Jj4EDMTp3HDL/view" target="_blank" data-en="E Pouthi RI and SHR User Manual" data-kn="ಇ ಪೌಠಿ ಆರ್.ಐ ಮತ್ತು ಎಸ್.ಎಚ್.ಆರ್ ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">E Pouthi RI and SHR User Manual</a></li>
                     </ul>
 
             </div>
 
             <div class="card" id="RCCMS">
-                <h3><i class="bi bi-collection"></i> RCCMS</h3>
+                <h3><i class="bi bi-collection"></i> <span data-en="RCCMS" data-kn="ಆರ್.ಸಿ.ಸಿ.ಎಂ.ಎಸ್">RCCMS</span></h3>
                <ul>
-                        <li><a href="https://rccms.karnataka.gov.in/rccms/" target="_blank">Home</a></li>
-                        <li><a href="https://rccms.karnataka.gov.in/RCCMS/rccmsreports/searchcase.aspx" target="_blank">Status</a></li>
-                        <li><a href="https://drive.google.com/file/d/1UWhpQjtJO4Q5TFKAJO1R7LefQE3QDKwL/view" target="_blank">User Manual</a></li>
-                        <li><a href="https://drive.google.com/file/d/1wI1G3GACukFrGSWNWbLsHjhRCd2Nu7hP/view" target="_blank">Order Typing</a></li>
-                        <li><a href="https://drive.google.com/file/d/1oR_ns2Qc7T3yAOcjDtgTPjjsU60hCiMh/view" target="_blank">RCCMS Manual</a></li>
+                        <li><a href="https://rccms.karnataka.gov.in/rccms/" target="_blank" data-en="Home" data-kn="ಮುಖಪುಟ">Home</a></li>
+                        <li><a href="https://rccms.karnataka.gov.in/RCCMS/rccmsreports/searchcase.aspx" target="_blank" data-en="Status" data-kn="ಸ್ಥಿತಿ">Status</a></li>
+                        <li><a href="https://drive.google.com/file/d/1UWhpQjtJO4Q5TFKAJO1R7LefQE3QDKwL/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
+                        <li><a href="https://drive.google.com/file/d/1wI1G3GACukFrGSWNWbLsHjhRCd2Nu7hP/view" target="_blank" data-en="Order Typing" data-kn="ಆದೇಶ ಟೈಪಿಂಗ್">Order Typing</a></li>
+                        <li><a href="https://drive.google.com/file/d/1oR_ns2Qc7T3yAOcjDtgTPjjsU60hCiMh/view" target="_blank" data-en="RCCMS Manual" data-kn="ಆರ್.ಸಿ.ಸಿ.ಎಂ.ಎಸ್ ಮಾರ್ಗದರ್ಶಿ">RCCMS Manual</a></li>
                     </ul>
 
             </div>
-            <div class="card" id="Land-Availability">  <h3><i class="bi bi-signpost-split"></i> Land Availability</h3>
+            <div class="card" id="Land-Availability">
+                <h3><i class="bi bi-signpost-split"></i> <span data-en="Land Availability" data-kn="ಭೂ ಲಭ್ಯತೆ">Land Availability</span></h3>
                     <ul>
-                        <li><a href="https://rdservices.karnataka.gov.in/landavailability_tccw" target="_blank">Data Entry TCCW</a></li>
-                        <li><a href="https://rdservices.karnataka.gov.in/landavailability_tah" target="_blank">Approval Tahsildar</a></li>
-                        <li><a href="https://drive.google.com/file/d/1TCFBgoJn_mpdGkfGIRmjWU2m3TKYZi9T/view" target="_blank">User Manual</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/landavailability_tccw" target="_blank" data-en="Data Entry TCCW" data-kn="ಡೇಟಾ ಎಂಟ್ರಿ ಟಿ.ಸಿ.ಸಿ.ಡಬ್ಲ್ಯೂ">Data Entry TCCW</a></li>
+                        <li><a href="https://rdservices.karnataka.gov.in/landavailability_tah" target="_blank" data-en="Approval Tahsildar" data-kn="ಅನುಮೋದನೆ ತಹಸೀಲ್ದಾರ್">Approval Tahsildar</a></li>
+                        <li><a href="https://drive.google.com/file/d/1TCFBgoJn_mpdGkfGIRmjWU2m3TKYZi9T/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
                     </ul>
 
             </div>
             <div class="card" id="Plantation-on-Lease">
-                <h3><i class="bi bi-tree"></i> Plantation</h3>
+                <h3><i class="bi bi-tree"></i> <span data-en="Plantation" data-kn="ತೋಟಗಾರಿಕೆ">Plantation</span></h3>
                  <ul>
-                        <li><a href="https://landrecords.karnataka.gov.in/Service158/plantationlease/" target="_blank">Data Entry TCCW</a></li>
-                        <li><a href="https://drive.google.com/file/d/1nfwMclx1XHe2c5jHrxQF1VUTaxQgfUO9/view" target="_blank">User Manual</a></li>
+                        <li><a href="https://landrecords.karnataka.gov.in/Service158/plantationlease/" target="_blank" data-en="Data Entry TCCW" data-kn="ಡೇಟಾ ಎಂಟ್ರಿ ಟಿ.ಸಿ.ಸಿ.ಡಬ್ಲ್ಯೂ">Data Entry TCCW</a></li>
+                        <li><a href="https://drive.google.com/file/d/1nfwMclx1XHe2c5jHrxQF1VUTaxQgfUO9/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
                     </ul>
             </div>
             <div class="card" id="MobileApps">
-                <h3><i class="bi bi-android2"></i> Mobile Apps</h3>
-                <ul><li><a href="https://drive.google.com/drive/u/0/folders/1E2Pw54inV99bT8O61aC7juv-VIRTVkYT">Download Apps</a></li></ul>
+                <h3><i class="bi bi-android2"></i> <span data-en="Mobile Apps" data-kn="ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್ಗಳು">Mobile Apps</span></h3>
+                <ul><li><a href="https://drive.google.com/drive/u/0/folders/1E2Pw54inV99bT8O61aC7juv-VIRTVkYT" data-en="Download Apps" data-kn="ಅಪ್ಲಿಕೇಶನ್ಗಳನ್ನು ಡೌನ್ಲೋಡ್ ಮಾಡಿ">Download Apps</a></li></ul>
             </div>
 
         </div>
@@ -576,33 +719,33 @@
     <footer class="gov-footer">
         <div class="footer-top">
             <div class="footer-brand">
-                <h2 style="color: var(--brand-gold); font-size: 1.2rem;">DEPUTY COMMISSIONER OFFICE, BIDAR</h2>
-                <p style="margin: 15px 0; font-size: 0.8rem; color: #cbd5e1;">Official portal for transparent and efficient land record services for the citizens of Bidar.</p>
-                <div style="font-size: 0.8rem;"><i class="bi bi-geo-alt-fill"></i> 1st Floor, DC Office, Bidar 585401</div>
+                <h2 style="color: var(--brand-gold); font-size: 1.2rem;" data-en="DEPUTY COMMISSIONER OFFICE, BIDAR" data-kn="ಜಿಲ್ಲಾಧಿಕಾರಿ ಕಚೇರಿ, ಬೀದರ್">DEPUTY COMMISSIONER OFFICE, BIDAR</h2>
+                <p style="margin: 15px 0; font-size: 0.8rem; color: #cbd5e1;" data-en="Official portal for transparent and efficient land record services for the citizens of Bidar." data-kn="ಬೀದರ್ ನಾಗರಿಕರಿಗೆ ಪಾರದರ್ಶಕ ಮತ್ತು ಸಮರ್ಥ ಭೂ ದಾಖಲೆ ಸೇವೆಗಳ ಅಧಿಕೃತ ಪೋರ್ಟಲ್.">Official portal for transparent and efficient land record services for the citizens of Bidar.</p>
+                <div style="font-size: 0.8rem;"><i class="bi bi-geo-alt-fill"></i> <span data-en="1st Floor, DC Office, Bidar 585401" data-kn="ಮೊದಲ ಮಹಡಿ, ಡಿ.ಸಿ ಕಚೇರಿ, ಬೀದರ್ 585401">1st Floor, DC Office, Bidar 585401</span></div>
             </div>
             <div class="footer-links">
-                <h4>Quick Links</h4>
+                <h4 data-en="Quick Links" data-kn="ತ್ವರಿತ ಕೊಂಡಿಗಳು">Quick Links</h4>
                             <ul>
-    							<li><a href="https://bidar.nic.in/en/" target="_blank" style="font-size: 0.8rem;">About District</a></li>
-   								<li><a href="Officers.html" style="font-size: 0.8rem;">District Officers</a></li>
+    							<li><a href="https://bidar.nic.in/en/" target="_blank" style="font-size: 0.8rem;" data-en="About District" data-kn="ಜಿಲ್ಲೆಯ ಬಗ್ಗೆ">About District</a></li>
+   								<li><a href="Officers.html" style="font-size: 0.8rem;" data-en="District Officers" data-kn="ಜಿಲ್ಲಾ ಅಧಿಕಾರಿಗಳು">District Officers</a></li>
 							</ul>
             </div>
             <div class="footer-links">
-                <h4>External Links</h4>
+                <h4 data-en="External Links" data-kn="ಬಾಹ್ಯ ಕೊಂಡಿಗಳು">External Links</h4>
                <ul>
-   					 <li><a href="https://karnataka.gov.in" target="_blank" style="font-size: 0.8rem;">Karnataka Govt</a></li>
- 					 <li><a href="https://kandaya.karnataka.gov.in/en" target="_blank" style="font-size: 0.8rem;">Revenue Dept. Karnataka</a></li>
+   					 <li><a href="https://karnataka.gov.in" target="_blank" style="font-size: 0.8rem;" data-en="Karnataka Govt" data-kn="ಕರ್ನಾಟಕ ಸರ್ಕಾರ">Karnataka Govt</a></li>
+ 					 <li><a href="https://kandaya.karnataka.gov.in/en" target="_blank" style="font-size: 0.8rem;" data-en="Revenue Dept. Karnataka" data-kn="ರೆವೆನ್ಯೂ ಇಲಾಖೆ ಕರ್ನಾಟಕ">Revenue Dept. Karnataka</a></li>
 			  </ul>
             </div>
             <div class="footer-links">
-    			<h4>Support</h4>
+    			<h4 data-en="Support" data-kn="ಬೆಂಬಲ">Support</h4>
     				   <p style="font-size: 0.8rem;"><i class="bi bi-telephone-fill"></i> 08482-225409</p>
          			   <p style="font-size: 0.8rem;"><i class="bi bi-phone"></i> 94808 32160</p>
          			   <p style="font-size: 0.8rem;"><i class="bi bi-envelope"></i> bhoomi.bidar@gmail.com</p>
 			</div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Revenue Department, Bidar. Developed by <a href="https://arvindbadagi.github.io/Portfolio/" target="_blank">Aravind Badagi</a></p>
+            <p>&copy; 2025 Revenue Department, Bidar. <span data-en="Developed by" data-kn="ವಿಕಸಿಸಿದವರು">Developed by</span> <a href="https://arvindbadagi.github.io/Portfolio/" target="_blank">Aravind Badagi</a></p>
         </div>
         <button id="goTopBtn" title="Go to Top"><i class="bi bi-arrow-up-short"></i></button>
 		<a href="https://wa.me/919480832160?text=Hello%20Bidar%20Revenue%20Dept,%20I%20have%20a%20feedback/query%20regarding..." 
@@ -614,29 +757,118 @@
     </footer>
 
     <script>
+        // Language Toggle Logic
+        const langToggle = document.getElementById('langToggle');
+        const currentLangLabel = document.getElementById('currentLang');
+        const body = document.body;
+        
+        let currentLang = 'en'; // Default language is English
+        
+        // Announcements in both languages
+        const announcements = {
+            en: [
+                'Parihara payment disbursement is processed. <a href="https://bhoomibidar.github.io/parihara/" style="color: var(--brand-magenta); text-decoration: underline;" data-en="Verify Farmer ID here" data-kn="ರೈತರ ಐಡಿಯನ್ನು ಇಲ್ಲಿ ಪರಿಶೀಲಿಸಿ">Verify Farmer ID here</a>',
+                'Record Room reports are now available online.',
+                'RTC verification manual updated in Aadhar section.'
+            ],
+            kn: [
+                'ಪರಿಹಾರ ಪಾವತಿ ಹಂಚಿಕೆ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗಿದೆ. <a href="https://bhoomibidar.github.io/parihara/" style="color: var(--brand-magenta); text-decoration: underline;" data-en="Verify Farmer ID here" data-kn="ರೈತರ ಐಡಿಯನ್ನು ಇಲ್ಲಿ ಪರಿಶೀಲಿಸಿ">ರೈತರ ಐಡಿಯನ್ನು ಇಲ್ಲಿ ಪರಿಶೀಲಿಸಿ</a>',
+                'ರೆಕಾರ್ಡ್ ಕೊಠಡಿ ವರದಿಗಳು ಈಗ ಆನ್ಲೈನ್‌ನಲ್ಲಿ ಲಭ್ಯವಿದೆ.',
+                'ಆಧಾರ ವಿಭಾಗದಲ್ಲಿ ಆರ್.ಟಿ.ಸಿ ಪರಿಶೀಲನೆ ಮಾರ್ಗದರ್ಶಿ ನವೀಕರಿಸಲಾಗಿದೆ.'
+            ]
+        };
+        
+        // Function to switch language
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update body class for font
+            if (lang === 'kn') {
+                body.classList.add('kannada');
+                langToggle.classList.add('active');
+                currentLangLabel.textContent = 'ಕನ್ನಡ';
+            } else {
+                body.classList.remove('kannada');
+                langToggle.classList.remove('active');
+                currentLangLabel.textContent = 'English';
+            }
+            
+            // Update all elements with data-en and data-kn attributes
+            document.querySelectorAll('[data-en], [data-kn]').forEach(element => {
+                if (lang === 'en' && element.hasAttribute('data-en')) {
+                    if (element.tagName === 'INPUT') {
+                        element.placeholder = element.getAttribute('data-en');
+                    } else if (element.tagName === 'A' && !element.hasAttribute('href')) {
+                        // Handle links without href (javascript links)
+                        element.textContent = element.getAttribute('data-en');
+                    } else {
+                        element.textContent = element.getAttribute('data-en');
+                    }
+                } else if (lang === 'kn' && element.hasAttribute('data-kn')) {
+                    if (element.tagName === 'INPUT') {
+                        element.placeholder = element.getAttribute('data-kn');
+                    } else if (element.tagName === 'A' && !element.hasAttribute('href')) {
+                        // Handle links without href (javascript links)
+                        element.textContent = element.getAttribute('data-kn');
+                    } else {
+                        element.textContent = element.getAttribute('data-kn');
+                    }
+                }
+            });
+            
+            // Update announcement label
+            document.getElementById('annLabelText').textContent = lang === 'en' ? 'UPDATES' : 'ನವೀಕರಣಗಳು';
+            
+            // Update announcements
+            aIdx = 0; // Reset to first announcement
+            document.getElementById('annText').innerHTML = announcements[lang][aIdx];
+            
+            // Update search placeholder
+            document.getElementById('siteSearch').placeholder = lang === 'en' 
+                ? 'Search for a service...' 
+                : 'ಸೇವೆಯನ್ನು ಹುಡುಕಿ...';
+        }
+        
+        // Toggle language on click
+        langToggle.addEventListener('click', () => {
+            const newLang = currentLang === 'en' ? 'kn' : 'en';
+            switchLanguage(newLang);
+            
+            // Save preference to localStorage
+            localStorage.setItem('preferredLang', newLang);
+        });
+        
+        // Check for saved language preference
+        const savedLang = localStorage.getItem('preferredLang');
+        if (savedLang) {
+            switchLanguage(savedLang);
+        }
+        
         // Hero Slider Logic
         let cur = 0; const slides = document.querySelectorAll('.hero-slide');
         function rotate() { slides[cur].classList.remove('active'); cur = (cur + 1) % slides.length; slides[cur].classList.add('active'); }
         setInterval(rotate, 5000);
-
+        
+        // Announcement Logic
+        let aIdx = 0;
+        function nextAnn() { 
+            aIdx = (aIdx + 1) % announcements[currentLang].length; 
+            document.getElementById('annText').innerHTML = announcements[currentLang][aIdx]; 
+        }
+        function prevAnn() { 
+            aIdx = (aIdx - 1 + announcements[currentLang].length) % announcements[currentLang].length; 
+            document.getElementById('annText').innerHTML = announcements[currentLang][aIdx]; 
+        }
+        
         // Filter Services Logic
         function filterServices() {
             let input = document.getElementById('siteSearch').value.toLowerCase();
             document.querySelectorAll('.card').forEach(card => {
-                card.style.display = card.innerText.toLowerCase().includes(input) ? "block" : "none";
+                const cardText = card.innerText.toLowerCase();
+                card.style.display = cardText.includes(input) ? "block" : "none";
             });
         }
-
-        // Announcement Logic
-        const anns = [
-            'Parihara payment disbursement is processed. <a href="https://bhoomibidar.github.io/parihara/">Verify ID here</a>',
-            'Record Room reports are now available online.',
-            'RTC verification manual updated in Aadhar section.'
-        ];
-        let aIdx = 0;
-        function nextAnn() { aIdx = (aIdx + 1) % anns.length; document.getElementById('annText').innerHTML = anns[aIdx]; }
-        function prevAnn() { aIdx = (aIdx - 1 + anns.length) % anns.length; document.getElementById('annText').innerHTML = anns[aIdx]; }
-
+        
         // Navigation Scroll Helper
         function scrollToCard(id) {
             const el = document.getElementById(id);
@@ -644,11 +876,22 @@
                 window.scrollTo({ top: el.offsetTop - 120, behavior: 'smooth' });
             }
         }
-
+        
         // Back to Top Logic
         const goTopBtn = document.getElementById("goTopBtn");
         window.onscroll = () => { goTopBtn.style.display = (document.documentElement.scrollTop > 300) ? "block" : "none"; };
         goTopBtn.onclick = () => { window.scrollTo({ top: 0, behavior: "smooth" }); };
+        
+        // Update search placeholder based on language
+        function updateSearchPlaceholder() {
+            const searchInput = document.getElementById('siteSearch');
+            searchInput.placeholder = currentLang === 'en' 
+                ? 'Search for a service...' 
+                : 'ಸೇವೆಯನ್ನು ಹುಡುಕಿ...';
+        }
+        
+        // Initialize
+        updateSearchPlaceholder();
     </script>
 </body>
 </html>
