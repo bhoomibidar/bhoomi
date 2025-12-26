@@ -257,19 +257,100 @@
             display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px;
             border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 40px;
         }
-        .footer-links h4 { color: #fff; margin-bottom: 20px; border-left: 3px solid var(--brand-gold); padding-left: 10px; text-transform: uppercase; font-size: 0.9rem; }
+.footer-links h4 {
+    font-size: 1rem;   /* smaller heading */
+    margin-bottom: 6px;
+}
+
+.footer-links ul {
+    padding-left: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    list-style: none;
+    margin-bottom: 4px;  /* tighter spacing */
+}
+
+.footer-links ul li a {
+    font-size: 0.85rem;  /* smaller link text */
+    color: #475569;
+    text-decoration: none;
+}
+
+.footer-links ul li a:hover {
+    color: #7b0046;
+    text-decoration: underline;
+}
+footer {
+    padding: 18px 0;        /* reduce overall height */
+}
+
+.footer-container {
+    gap: 24px;              /* reduce column spacing */
+}
+
+.footer-brand h3 {
+    font-size: 1.05rem;     /* smaller title */
+    margin-bottom: 6px;
+}
+
+.footer-brand p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.footer-links h4 {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+.footer-links ul li {
+    margin-bottom: 4px;     /* tighter list */
+}
+
+.footer-links ul li a {
+    font-size: 0.85rem;
+}
+
+.footer-support p {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+
+        .footer-links h4 { color: #fff; margin-bottom: 20px; border-left: 3px solid var(--brand-gold); padding-left: 10px; text-transform: uppercase; font-size: 0.5rem; }
         .footer-links ul li a { color: #ffffff !important; opacity: 0.9; }
         .footer-links ul li a:hover { color: var(--brand-gold) !important; opacity: 1; }
         .footer-bottom { text-align: center; padding-top: 20px; font-size: 0.8rem; color: #94a3b8; }
         .footer-bottom a { color: var(--brand-gold); font-weight: bold; }
 
+        /* ========== GO TO TOP BUTTON ========== */
         #goTopBtn {
-            position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px;
-            border-radius: 50%; border: none; background: var(--brand-magenta); color: #fff;
-            font-size: 1.8rem; cursor: pointer; box-shadow: var(--shadow-md); display: none; z-index: 2000;
+            position: fixed; 
+            bottom: 100px; 
+            right: 30px; 
+            width: 48px; 
+            height: 48px;
+            border-radius: 50%; 
+            border: none; 
+            background: var(--brand-magenta); 
+            color: #fff;
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            box-shadow: var(--shadow-md); 
+            display: none; 
+            z-index: 2000;
+            transition: all 0.3s ease;
         }
 
-        /* WhatsApp Feedback Button */
+        #goTopBtn:hover {
+            background: var(--brand-magenta-light);
+            transform: scale(1.1);
+        }
+
+        /* ========== WHATSAPP FEEDBACK BUTTON ========== */
         .whatsapp-feedback {
             position: fixed;
             bottom: 30px;
@@ -287,11 +368,13 @@
             align-items: center;
             justify-content: center;
             transition: transform 0.3s ease;
+            text-decoration: none;
         }
 
         .whatsapp-feedback:hover {
             transform: scale(1.1);
             color: #fff;
+            text-decoration: none;
         }
 
         .whatsapp-feedback::after {
@@ -306,13 +389,14 @@
             opacity: 0;
             pointer-events: none;
             transition: 0.3s;
+            white-space: nowrap;
         }
 
         .whatsapp-feedback:hover::after {
             opacity: 1;
         }
 
-        /* Kannada Language Style */
+        /* ========== KANNADA LANGUAGE STYLE ========== */
         body.kannada {
             font-family: 'Noto Sans Kannada', 'Inter', sans-serif;
         }
@@ -321,6 +405,26 @@
             font-family: 'Noto Sans Kannada', 'Merriweather', serif;
         }
 
+        /* ========== VISITOR COUNTER ========== */
+        .footer-visitor {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .footer-visitor i {
+            color: var(--brand-gold);
+        }
+
+        .footer-visitor strong {
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
         @media (max-width: 1200px) { 
             .links-grid { grid-template-columns: repeat(3, 1fr); } 
             .lang-toggle-container {
@@ -354,14 +458,31 @@
             }
             .links-grid { grid-template-columns: repeat(2, 1fr); } 
             .footer-top { grid-template-columns: 1fr 1fr; } 
+            .search-bar { width: 250px; }
         }
         
         @media (max-width: 600px) { 
-            .links-grid { grid-template-columns: 1fr); } 
-            .footer-top { grid-template-columns: 1fr); } 
+            .links-grid { grid-template-columns: 1fr; } 
+            .footer-top { grid-template-columns: 1fr; } 
             .lang-toggle-container {
                 flex-direction: column;
                 gap: 5px;
+            }
+            .search-bar { width: 100%; margin-top: 15px; }
+            .grid-header { flex-direction: column; align-items: flex-start; }
+            .whatsapp-feedback {
+                bottom: 80px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+            #goTopBtn {
+                bottom: 80px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -384,7 +505,7 @@
         </div>
         <div class="header-profile right">
             <div>
-                <div class="gov-name" data-en="Sri Shivanand B Karale, KAS" data-kn="ಶ್ರೀ ಶಿವಾನಂದ ಬಿ ಕಾರಳೆ, ಕೆ.ಎ.ಎಸ್">Sri Shivanand B Karale, KAS</div>
+                <div class="gov-name" data-en="Sri Shivanand B Karale, KAS" data-kn="ಶ್ರೀ ಶಿವಾನಂದ ಬಿ ಕರಾಳೆ, ಕೆ.ಎ.ಎಸ್">Sri Shivanand B Karale, KAS</div>
                 <div class="gov-desig" data-en="Additional Deputy Commissioner, Bidar" data-kn="ಅಪಾರ ಜಿಲ್ಲಾಧಿಕಾರಿ, ಬೀದರ್">Additional Deputy Commissioner, Bidar</div>
             </div>
             <img src="assets/img/adc.jpg" alt="ADC Profile" class="gov-photo">
@@ -718,48 +839,74 @@
         </div>
     </main>
 
+    <!-- ========== FLOATING BUTTONS ========== -->
+    <!-- Go to Top Button -->
+    <button id="goTopBtn" title="Go to top">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- WhatsApp Feedback Button -->
+    <a href="https://wa.me/919480832160?text=Feedback%20for%20Deputy%20Commissioner%20Office%20Bidar%20Website" target="_blank" class="whatsapp-feedback">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <!-- ================= FOOTER ================= -->
     <footer class="gov-footer">
         <div class="footer-top">
-            <div class="footer-brand">
-                <h2 style="color: var(--brand-gold); font-size: 1.2rem;" data-en="DEPUTY COMMISSIONER OFFICE, BIDAR" data-kn="ಜಿಲ್ಲಾಧಿಕಾರಿ ಕಚೇರಿ, ಬೀದರ್">DEPUTY COMMISSIONER OFFICE, BIDAR</h2>
-                <p style="margin: 15px 0; font-size: 0.8rem; color: #cbd5e1;" data-en="Official portal for transparent and efficient land record services for the citizens of Bidar." data-kn="ಬೀದರ್ ನಾಗರಿಕರಿಗೆ ಪಾರದರ್ಶಕ ಮತ್ತು ಸಮರ್ಥ ಭೂ ದಾಖಲೆ ಸೇವೆಗಳ ಅಧಿಕೃತ ಪೋರ್ಟಲ್.">Official portal for transparent and efficient land record services for the citizens of Bidar.</p>
-                <div style="font-size: 0.8rem;"><i class="bi bi-geo-alt-fill"></i> <span data-en="1st Floor, DC Office, Bidar 585401" data-kn="ಮೊದಲ ಮಹಡಿ, ಡಿ.ಸಿ ಕಚೇರಿ, ಬೀದರ್ 585401">1st Floor, DC Office, Bidar 585401</span></div>
+            <div>
+                <h3 style="color:var(--brand-gold)">DEPUTY COMMISSIONER OFFICE, BIDAR</h3>
+                <p style="font-size:.8rem">
+                    Official portal for transparent and efficient land record services.
+                </p>
+                <p style="font-size:.8rem">
+                    <i class="bi bi-geo-alt-fill"></i> 1st Floor, DC Office, Bidar – 585401
+                </p>
             </div>
+
+<div class="footer-links">
+    <h4>Quick Links</h4>
+    <ul>
+        <li><a href="https://bidar.nic.in/en/" target="_blank">About District</a></li>
+        <li><a href="Officers.html">District Officers</a></li>
+    </ul>
+</div>
+
+<div class="footer-links">
+    <h4>External Links</h4>
+    <ul>
+        <li><a href="https://karnataka.gov.in" target="_blank">Karnataka Govt</a></li>
+        <li><a href="https://kandaya.karnataka.gov.in/en" target="_blank">Revenue Dept.</a></li>
+    </ul>
+</div>
+
             <div class="footer-links">
-                <h4 data-en="Quick Links" data-kn="ತ್ವರಿತ ಕೊಂಡಿಗಳು">Quick Links</h4>
-                            <ul>
-    							<li><a href="https://bidar.nic.in/en/" target="_blank" style="font-size: 0.8rem;" data-en="About District" data-kn="ಜಿಲ್ಲೆಯ ಬಗ್ಗೆ">About District</a></li>
-   								<li><a href="Officers.html" style="font-size: 0.8rem;" data-en="District Officers" data-kn="ಜಿಲ್ಲಾ ಅಧಿಕಾರಿಗಳು">District Officers</a></li>
-							</ul>
+                <h4>Support</h4>
+                <p style="font-size:.8rem"><i class="bi bi-telephone-fill"></i> 08482-225409</p>
+                <p style="font-size:.8rem"><i class="bi bi-phone"></i> 94808-32160</p>
+                <p style="font-size:.8rem"><i class="bi bi-envelope"></i> bhoomi.bidar@gmail.com</p>
             </div>
-            <div class="footer-links">
-                <h4 data-en="External Links" data-kn="ಬಾಹ್ಯ ಕೊಂಡಿಗಳು">External Links</h4>
-               <ul>
-   					 <li><a href="https://karnataka.gov.in" target="_blank" style="font-size: 0.8rem;" data-en="Karnataka Govt" data-kn="ಕರ್ನಾಟಕ ಸರ್ಕಾರ">Karnataka Govt</a></li>
- 					 <li><a href="https://kandaya.karnataka.gov.in/en" target="_blank" style="font-size: 0.8rem;" data-en="Revenue Dept. Karnataka" data-kn="ರೆವೆನ್ಯೂ ಇಲಾಖೆ ಕರ್ನಾಟಕ">Revenue Dept. Karnataka</a></li>
-			  </ul>
-            </div>
-            <div class="footer-links">
-    			<h4 data-en="Support" data-kn="ಬೆಂಬಲ">Support</h4>
-    				   <p style="font-size: 0.8rem;"><i class="bi bi-telephone-fill"></i> 08482-225409</p>
-         			   <p style="font-size: 0.8rem;"><i class="bi bi-phone"></i> 94808 32160</p>
-         			   <p style="font-size: 0.8rem;"><i class="bi bi-envelope"></i> bhoomi.bidar@gmail.com</p>
-			</div>
         </div>
+
+        <!-- ===== FINAL FOOTER BOTTOM ===== -->
         <div class="footer-bottom">
-            <p>&copy; 2025 Revenue Department, Bidar. <span data-en="Developed by" data-kn="ವಿಕಸಿಸಿದವರು">Developed by</span> <a href="https://arvindbadagi.github.io/Portfolio/" target="_blank">Aravind Badagi</a></p>
+            <!-- SMALL VISITOR COUNTER -->
+            <div class="footer-visitor">
+                <i class="bi bi-people-fill"></i>
+                <span data-en="Visitors" data-kn="ಭೇಟಿಗಾರರು">Visitors</span>:
+                <strong id="visitNumber">0</strong>
+            </div>
+
+            <p>
+                © 2025 Revenue Department, Bidar. Developed by
+                <a href="https://arvindbadagi.github.io/Portfolio/" target="_blank" style="color:var(--brand-gold)">
+                    Aravind Badagi
+                </a>
+            </p>
         </div>
-        <button id="goTopBtn" title="Go to Top"><i class="bi bi-arrow-up-short"></i></button>
-		<a href="https://wa.me/919480832160?text=Hello%20Bidar%20Revenue%20Dept,%20I%20have%20a%20feedback/query%20regarding..." 
-   class="whatsapp-feedback" 
-   target="_blank" 
-   title="Send Feedback via WhatsApp">
-    <i class="bi bi-whatsapp"></i>
-</a>
     </footer>
 
     <script>
-        // Language Toggle Logic
+        // ========== LANGUAGE TOGGLE LOGIC ==========
         const langToggle = document.getElementById('langToggle');
         const currentLangLabel = document.getElementById('currentLang');
         const body = document.body;
@@ -771,12 +918,16 @@
             en: [
                 'Parihara payment disbursement is processed. <a href="https://bhoomibidar.github.io/parihara/" style="color: var(--brand-magenta); text-decoration: underline;" data-en="Verify Farmer ID here" data-kn="ರೈತರ ಐಡಿಯನ್ನು ಇಲ್ಲಿ ಪರಿಶೀಲಿಸಿ">Verify Farmer ID here</a>',
                 'Record Room reports are now available online.',
-                'RTC verification manual updated in Aadhar section.'
+                'RTC verification manual updated in Aadhar section.',
+                'Bagair Hukum applications can now be tracked online.',
+                'Mobile apps for field survey available for download.'
             ],
             kn: [
                 'ಪರಿಹಾರ ಪಾವತಿ ಹಂಚಿಕೆ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗಿದೆ. <a href="https://bhoomibidar.github.io/parihara/" style="color: var(--brand-magenta); text-decoration: underline;" data-en="Verify Farmer ID here" data-kn="ರೈತರ ಐಡಿಯನ್ನು ಇಲ್ಲಿ ಪರಿಶೀಲಿಸಿ">ರೈತರ ಐಡಿಯನ್ನು ಇಲ್ಲಿ ಪರಿಶೀಲಿಸಿ</a>',
                 'ರೆಕಾರ್ಡ್ ಕೊಠಡಿ ವರದಿಗಳು ಈಗ ಆನ್ಲೈನ್‌ನಲ್ಲಿ ಲಭ್ಯವಿದೆ.',
-                'ಆಧಾರ ವಿಭಾಗದಲ್ಲಿ ಆರ್.ಟಿ.ಸಿ ಪರಿಶೀಲನೆ ಮಾರ್ಗದರ್ಶಿ ನವೀಕರಿಸಲಾಗಿದೆ.'
+                'ಆಧಾರ ವಿಭಾಗದಲ್ಲಿ ಆರ್.ಟಿ.ಸಿ ಪರಿಶೀಲನೆ ಮಾರ್ಗದರ್ಶಿ ನವೀಕರಿಸಲಾಗಿದೆ.',
+                'ಬಗೈರ್ ಹುಕುಂ ಅರ್ಜಿಗಳನ್ನು ಈಗ ಆನ್ಲೈನ್‌ನಲ್ಲಿ ಟ್ರ್ಯಾಕ್ ಮಾಡಬಹುದು.',
+                'ಕ್ಷೇತ್ರ ಸರ್ವೇಕ್ಷಣೆಗಾಗಿ ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಡೌನ್‌ಲೋಡ್‌ಗೆ ಲಭ್ಯವಿದೆ.'
             ]
         };
         
@@ -846,12 +997,17 @@
             switchLanguage(savedLang);
         }
         
-        // Hero Slider Logic
-        let cur = 0; const slides = document.querySelectorAll('.hero-slide');
-        function rotate() { slides[cur].classList.remove('active'); cur = (cur + 1) % slides.length; slides[cur].classList.add('active'); }
+        // ========== HERO SLIDER LOGIC ==========
+        let cur = 0; 
+        const slides = document.querySelectorAll('.hero-slide');
+        function rotate() { 
+            slides[cur].classList.remove('active'); 
+            cur = (cur + 1) % slides.length; 
+            slides[cur].classList.add('active'); 
+        }
         setInterval(rotate, 5000);
         
-        // Announcement Logic
+        // ========== ANNOUNCEMENT LOGIC ==========
         let aIdx = 0;
         function nextAnn() { 
             aIdx = (aIdx + 1) % announcements[currentLang].length; 
@@ -862,7 +1018,7 @@
             document.getElementById('annText').innerHTML = announcements[currentLang][aIdx]; 
         }
         
-        // Filter Services Logic
+        // ========== FILTER SERVICES LOGIC ==========
         function filterServices() {
             let input = document.getElementById('siteSearch').value.toLowerCase();
             document.querySelectorAll('.card').forEach(card => {
@@ -871,7 +1027,7 @@
             });
         }
         
-        // Navigation Scroll Helper
+        // ========== NAVIGATION SCROLL HELPER ==========
         function scrollToCard(id) {
             const el = document.getElementById(id);
             if(el) {
@@ -879,10 +1035,51 @@
             }
         }
         
-        // Back to Top Logic
+        // ========== GO TO TOP BUTTON LOGIC ==========
         const goTopBtn = document.getElementById("goTopBtn");
-        window.onscroll = () => { goTopBtn.style.display = (document.documentElement.scrollTop > 300) ? "block" : "none"; };
-        goTopBtn.onclick = () => { window.scrollTo({ top: 0, behavior: "smooth" }); };
+        window.onscroll = () => { 
+            goTopBtn.style.display = (document.documentElement.scrollTop > 300) ? "block" : "none"; 
+        };
+        goTopBtn.onclick = () => { 
+            window.scrollTo({ top: 0, behavior: "smooth" }); 
+        };
+        
+        // ========== VISITOR COUNTER LOGIC ==========
+        function updateVisitorCount() {
+            // Check if localStorage is available
+            if (typeof(Storage) !== "undefined") {
+                // Get current count or initialize
+                let visits = localStorage.getItem("bidarVisitorCount");
+                if (!visits) {
+                    visits = 1;
+                } else {
+                    visits = parseInt(visits) + 1;
+                }
+                
+                // Save updated count
+                localStorage.setItem("bidarVisitorCount", visits);
+                
+                // Display the count
+                document.getElementById("visitNumber").textContent = visits;
+                
+                // Format number with commas
+                document.getElementById("visitNumber").textContent = visits.toLocaleString();
+            } else {
+                document.getElementById("visitNumber").textContent = "N/A";
+            }
+        }
+        
+        // ========== INITIALIZE ALL FUNCTIONS ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize visitor counter
+            updateVisitorCount();
+            
+            // Update search placeholder based on language
+            updateSearchPlaceholder();
+            
+            // Initialize language
+            switchLanguage(currentLang);
+        });
         
         // Update search placeholder based on language
         function updateSearchPlaceholder() {
@@ -892,8 +1089,43 @@
                 : 'ಸೇವೆಯನ್ನು ಹುಡುಕಿ...';
         }
         
-        // Initialize
-        updateSearchPlaceholder();
+        // ========== ADDITIONAL ENHANCEMENTS ==========
+        // Smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Add active state to current page in navigation
+        const currentPage = window.location.pathname.split("/").pop();
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            if(link.getAttribute('href') === currentPage || 
+               (currentPage === '' && link.getAttribute('href') === 'index.html')) {
+                link.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                link.style.color = 'var(--brand-gold)';
+            }
+        });
+        
+        // Card hover enhancement
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderTopColor = 'var(--brand-magenta-light)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.borderTopColor = 'var(--brand-magenta)';
+            });
+        });
     </script>
 </body>
 </html>
