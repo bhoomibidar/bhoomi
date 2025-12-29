@@ -39,16 +39,35 @@
         ul { list-style: none; }
 
         /* ========== OFFICIAL HEADER (MATCHING IMAGE) ========== */
-        .gov-header {
-            background: #fff;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            padding: 12px 40px;
-            border-bottom: 1px solid var(--gov-border);
-            box-shadow: var(--shadow-sm);
-            position: relative;
-        }
+       /* ========== UPDATED OFFICIAL HEADER ========== */
+.gov-header {
+    background: #fff;
+    display: grid;
+    /* Changed from 1fr auto 1fr to pull sides toward center */
+    grid-template-columns: 1.5fr 2fr 1.5fr; 
+    align-items: center;
+    padding: 15px 10%; /* Added percentage padding to bring content inward */
+    border-bottom: 1px solid var(--gov-border);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    gap: 20px;
+}
+
+.header-center { 
+    text-align: center; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    border-left: 1px solid #eee; /* Optional: adds subtle separation */
+    border-right: 1px solid #eee; /* Optional: adds subtle separation */
+    padding: 0 15px;
+}
+
+/* Ensure the center logo doesn't push things too high */
+.header-center img {
+    width: 45px !important;
+    margin-bottom: 5px;
+}
 
         .header-profile { display: flex; align-items: center; gap: 15px; }
         .header-profile.right { justify-content: flex-end; text-align: right; }
