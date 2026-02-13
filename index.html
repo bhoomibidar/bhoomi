@@ -395,7 +395,90 @@
                 height: 40px;
                 font-size: 1.2rem;
             }
-        }
+        }/* Professional Marquee Styling */
+.news-ticker-container {
+    background: #fff;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--brand-magenta);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.ticker-label {
+    background: var(--brand-magenta);
+    color: var(--brand-gold);
+    padding: 0 25px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    z-index: 20;
+    position: relative;
+    clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+    white-space: nowrap;
+}
+
+.ticker-new-pill {
+    background: #ff0000;
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 10px;
+    font-weight: 800;
+    animation: ticker-pulse 1.2s infinite;
+    letter-spacing: 1px;
+}
+
+@keyframes ticker-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,0,0,0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+}
+
+.ticker-wrap {
+    flex: 1;
+    overflow: hidden;
+}
+
+.ticker-move {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: ticker-scroll 30s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 2rem;
+    font-size: 0.9rem;
+    color: var(--brand-magenta);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.ticker-item i {
+    margin-right: 8px;
+    color: var(--brand-magenta-light);
+}
+
+.ticker-item:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+@keyframes ticker-scroll {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+.news-ticker-container:hover .ticker-move {
+    animation-play-state: paused;
+}
     </style>
 </head>
 <body id="mainBody">
@@ -484,6 +567,25 @@
                 <li><a href="Officers.html" target="_blank" data-en="Contact Us" data-kn="ಅಧಿಕಾರಿಗಳನ್ನು ಸಂಪರ್ಕಿಸಿ"><span class="nav-text">View Officers</span></a></li>
             </ul>
         </div>
+        <div class="news-ticker-container">
+    <div class="ticker-label">
+        <i class="bi bi-lightning-fill"></i> 
+        <span data-en="LATEST UPDATES" data-kn="ಇತ್ತೀಚಿನ ನವೀಕರಣಗಳು">LATEST UPDATES</span>
+        <span class="ticker-new-pill">NEW</span>
+    </div>
+    <div class="ticker-wrap">
+        <div class="ticker-move">
+            <a href="https://drive.google.com/drive/u/1/folders/1-yhCeJwn4m39LUWT31U01LOga1ZlMzyu" target="_blank" class="ticker-item">
+                <i class="bi bi-file-earmark-pdf-fill"></i>
+                <span data-en="Bidar Talukwise Daywise Bhoomi Reports (2025-26)" data-kn="ಬೀದರ್ ತಾಲೂಕುವಾರು ದಿನನಿತ್ಯದ ಭೂಮಿ ವರದಿಗಳು (2025-26)">Bidar Talukwise Daywise Bhoomi Reports (2025-26)</span>
+            </a>
+            <a href="#" class="ticker-item">
+                <i class="bi bi-info-circle-fill"></i>
+                <span data-en="Parihara payment disbursement is processed. Check Farmer ID status." data-kn="ಪರಿಹಾರ ಪಾವತಿ ಹಂಚಿಕೆ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗಿದೆ. ರೈತರ ಐಡಿ ಸ್ಥಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ.">Parihara payment disbursement is processed. Check Farmer ID status.</span>
+            </a>
+        </div>
+    </div>
+</div>
     </nav>
 
     <!-- CONTENT FROM 2ND CODE -->
@@ -695,6 +797,10 @@
                     <li><a href="https://landrecords.karnataka.gov.in/service110" target="_blank" data-en="MIS RTC, 3 & 9, Pyki Mismatch" data-kn="ಎಂ.ಐ.ಎಸ್ ಆರ್.ಟಿ.ಸಿ, 3 & 9, ಪೈಕಿ ಹೊಂದಾಣಿಕೆಯಾಗದ">MIS RTC, 3 & 9, Pyki Mismatch</a></li>
                     <li><a href="https://rdservices.karnataka.gov.in/bhoomigis/" target="_blank" data-en="Bhoomi GIS" data-kn="ಭೂಮಿ ಜಿ.ಐ.ಎಸ್">Bhoomi GIS</a></li>
                     <li><a href="https://landrecords.karnataka.gov.in/service154/" target="_blank" data-en="RTC and Mutation Extract" data-kn="ಆರ್.ಟಿ.ಸಿ ಮತ್ತು ಮ್ಯುಟೇಶನ್ ಎಕ್ಸ್ಟ್ರಾಕ್ಟ್">RTC and Mutation Extract</a></li>
+                    <li><a href="https://rdreports.karnataka.gov.in/" target="_blank" data-en="Revenue Dashboard" data-kn="ವರದಿ">Revenue Dashboard</a></li>
+                    <li><a href="https://rdservices.karnataka.gov.in/BhoomiMaps/" target="_blank" data-en="Bhoomi Maps" data-kn="ನಕ್ಷೆಗಳು">Bhoomi Maps</a></li>
+                    <li><a href="https://rdservices.karnataka.gov.in/echawadi/" target="_blank" data-en="E-Chavadi" data-kn="ಇ-ಚಾವಡಿ">E-Chavadi</a></li>
+
                 </ul>
             </div>
             <div class="card" id="Aadhar-Seeding-RTC">
@@ -736,6 +842,7 @@
                 <ul>
                     <li><a href="https://landrecords.karnataka.gov.in/Service158/plantationlease/" target="_blank" data-en="Data Entry TCCW" data-kn="ಡೇಟಾ ಎಂಟ್ರಿ ಟಿ.ಸಿ.ಸಿ.ಡಬ್ಲ್ಯೂ">Data Entry TCCW</a></li>
                     <li><a href="https://drive.google.com/file/d/1nfwMclx1XHe2c5jHrxQF1VUTaxQgfUO9/view" target="_blank" data-en="User Manual" data-kn="ಬಳಕೆದಾರ ಮಾರ್ಗದರ್ಶಿ">User Manual</a></li>
+                   
                 </ul>
             </div>
             <div class="card" id="Softwares">
